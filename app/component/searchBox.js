@@ -37,7 +37,7 @@ class SearchBox extends Component {
 
 const styles = StyleSheet.create({
     search: {
-        marginTop: 5,
+        marginTop: 15,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
@@ -48,8 +48,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,1)',
         paddingLeft: 15,
         borderRadius: 10,
-        borderWidth: 0.8,
-        borderColor: '#333'
     },
 });
 export default SearchBox;
