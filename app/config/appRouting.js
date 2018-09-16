@@ -4,6 +4,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import NewFeedRouting from "./newFeedRouting";
 import { COLORS } from '../module';
 import {View} from 'react-native';
+import MapRouting from "./mapRouting";
 
 const color = "rgba(0,0,0,0.3)";
 const activeColor = COLORS.POSITIVE_COLOR;
@@ -60,7 +61,7 @@ const AppRouting = TabNavigator(
     },
 
     Map: {
-      screen: NewFeedRouting,
+      screen: MapRouting,
       navigationOptions: {
         title: "Map",
         tabBarIcon: ({ focused }) =>

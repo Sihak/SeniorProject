@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image , ScrollView} from 'react-native';
 import TabHeader from '../../component/tabHeader';
 import { DIMENSION, APPEARANCES, COLORS } from '../../module';
 import ScrollableMenu from '../../component/scrollableMenu';
-
+import SearchBox from '../../component/searchBox'
 export default class NewFeed extends Component {
   constructor(props) {
     super(props);
@@ -44,6 +44,7 @@ export default class NewFeed extends Component {
         <ScrollableMenu
        tittle = {'Street Food'}
        />
+       <SearchBox/>
       </ScrollView>
     );
   }
