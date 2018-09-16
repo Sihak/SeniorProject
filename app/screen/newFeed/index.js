@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image , ScrollView} from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import TabHeader from '../../component/tabHeader';
 import { DIMENSION, APPEARANCES, COLORS } from '../../module';
 import ScrollableMenu from '../../component/scrollableMenu';
@@ -11,7 +11,9 @@ export default class NewFeed extends Component {
     };
   }
 
-
+  navigate(screen, type, backgroundColor, isSeeAll) {
+    this.props.navigation.navigate(screen, { type: type, backgroundColor: backgroundColor, isSeeAll:isSeeAll })
+  }
 
   render() {
     return (
@@ -22,29 +24,48 @@ export default class NewFeed extends Component {
           headerTittle={'New Feed'}
         />
         <View style={styles.featureButtonContainer}>
-          <TouchableOpacity style={[styles.feature, APPEARANCES.SHADOW,{backgroundColor:COLORS.ORANGE_YELLOW}]}>
+          <TouchableOpacity
+            onPress={() => this.navigate('List', 'Drinks', COLORS.ORANGE_YELLOW,false)}
+            style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.ORANGE_YELLOW }]}>
             <Image source={require('../../asset/images/drinks.png')} style={styles.featureIcon} />
             <Text style={styles.label} >Drink</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.feature, APPEARANCES.SHADOW,{backgroundColor:COLORS.LIGHT_BLUE}]}>
+          <TouchableOpacity
+            onPress={() => this.navigate('List', 'Food', COLORS.LIGHT_BLUE,false)}
+            style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.LIGHT_BLUE }]}>
             <Image source={require('../../asset/images/food.png')} style={styles.featureIcon} />
             <Text style={styles.label} >Food</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.feature, APPEARANCES.SHADOW,{backgroundColor:COLORS.DARK_GREEN}]}>
+          <TouchableOpacity
+            onPress={() => this.navigate('List', 'Street Food', COLORS.DARK_GREEN,false)}
+            style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.DARK_GREEN }]}>
             <Image source={require('../../asset/images/streetFood.png')} style={styles.featureIcon} />
             <Text style={styles.label}>Street Food</Text>
           </TouchableOpacity>
         </View>
-       <ScrollableMenu
-       tittle = {'Drink'}
-       />
         <ScrollableMenu
-       tittle = {'Food'}
-       />
+          seeAllPressed={() => this.navigate('List', 'Drinks', COLORS.ORANGE_YELLOW,true)}
+          itemPressed={() => this.props.navigation.navigate('ViewDetail', {
+            backgroundColor: COLORS.ORANGE_YELLOW,
+          })}
+          tittle={'Drink'}
+        />
         <ScrollableMenu
-       tittle = {'Street Food'}
-       />
-       <SearchBox/>
+          seeAllPressed={() => this.navigate('List', 'Food', COLORS.LIGHT_BLUE,true)}
+          itemPressed={() => this.props.navigation.navigate('ViewDetail', {
+            backgroundColor: COLORS.LIGHT_BLUE,
+          })}
+          tittle={'Food'}
+        />
+        <ScrollableMenu
+
+          seeAllPressed={() => this.navigate('List', 'Street Food', COLORS.DARK_GREEN,true)}
+          itemPressed={() => this.props.navigation.navigate('ViewDetail', {
+            backgroundColor: COLORS.DARK_GREEN,
+          })}
+          tittle={'Street Food'}
+        />
+
       </ScrollView>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, TouchableOpacity ,Image } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import { DIMENSION, APPEARANCES, COLORS } from '../module'
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
@@ -14,41 +14,46 @@ export default class ScrollableMenu extends Component {
         return (
             <View style={styles.scrollableMenu}>
                 <View style={styles.header}>
-                    <Text style = {styles.scrollableMenuName}>{this.props.tittle}</Text>
-                    <TouchableOpacity>
-                    <Text style = {styles.seeAll}>See all</Text>
+                    <Text style={styles.scrollableMenuName}>{this.props.tittle}</Text>
+                    <TouchableOpacity
+                    onPress = {this.props.seeAllPressed}
+                    >
+                        <Text style={styles.seeAll}>See all</Text>
                     </TouchableOpacity>
                 </View>
                 <FlatList
-                    data = {[1,2,3,4,5]}
-                    keyExtractor = {(index) => index.toString()}
-                    horizontal = {true}
-                    style={[styles.list,APPEARANCES.SHADOW]}
-                    renderItem = {({item}) => {
-                        return(
-                            <TouchableOpacity style = {[styles.card,APPEARANCES.SHADOW]}>
-                            <View style = {styles.coverContainer}>
-                            <Image 
-                             style = {styles.cover} source = {require('../asset/images/coverSample.jpg')} />
-                            </View>
-                            <View style = {styles.details}>
-                                <Text style = {styles.companyName}>Koi The</Text>
-                                <Text style = {styles.description}>
-                                Wanna try our new tastes ?
+                    showsHorizontalScrollIndicator={false}
+                    data={[1, 2, 3, 4, 5]}
+                    keyExtractor={(index) => index.toString()}
+                    horizontal={true}
+                    style={[styles.list, APPEARANCES.SHADOW]}
+                    renderItem={({ item }) => {
+                        return (
+                            <TouchableOpacity 
+                            onPress = {this.props.itemPressed}
+                            style={[styles.card, APPEARANCES.SHADOW]}>
+                                <View style={styles.coverContainer}>
+                                    <Image
+                                        style={styles.cover} source={require('../asset/images/coverSample.jpg')} />
+                                </View>
+                                <View style={styles.details}>
+                                    <Text style={styles.companyName}>Koi The</Text>
+                                    <Text style={styles.description}>
+                                        Wanna try our new tastes ?
                                 </Text>
-                                <View style = {styles.contact}>
-                                    <MaterialIcons style = {styles.icon} name = {'place'} />  
-                                    <Text style = {styles.contactText}>
-                                    Street 360, #44E0
+                                    <View style={styles.contact}>
+                                        <MaterialIcons style={styles.icon} name={'place'} />
+                                        <Text style={styles.contactText}>
+                                            Street 360, #44E0
                                     </Text>
-                                </View>
-                                <View style = {styles.contact}>
-                                    <MaterialIcons style = {styles.icon} name = {'call'} />  
-                                    <Text style = {styles.contactText}>
-                                    (+855) 69 959 168
+                                    </View>
+                                    <View style={styles.contact}>
+                                        <MaterialIcons style={styles.icon} name={'call'} />
+                                        <Text style={styles.contactText}>
+                                            (+855) 69 959 168
                                     </Text>
+                                    </View>
                                 </View>
-                            </View>
                             </TouchableOpacity>
                         )
                     }}
@@ -59,77 +64,77 @@ export default class ScrollableMenu extends Component {
 }
 
 const styles = {
-    list:{
-        paddingVertical:5,
+    list: {
+        paddingVertical: 5,
     },
     scrollableMenu: {
-        marginTop:10,
+        marginTop: 10,
     },
-    card:{
+    card: {
         marginVertical: 5,
-        width:DIMENSION(70),
-        height:DIMENSION(70),
-        borderRadius:12,
-        overflow:'hidden',
+        width: DIMENSION(70),
+        height: DIMENSION(70),
+        borderRadius: 12,
+        overflow: 'hidden',
         marginHorizontal: 10,
         backgroundColor: '#fff',
     },
-    cover:{
-        width:'100%',
-        height:'100%'
+    cover: {
+        width: '100%',
+        height: '100%'
     },
-    coverContainer:{
-        width:'100%',
-        height:'60%',
+    coverContainer: {
+        width: '100%',
+        height: '60%',
     },
-    header:{
+    header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingVertical:15,
+        paddingVertical: 15,
         paddingHorizontal: 10,
     },
 
-    details:{
-        padding:6.5
+    details: {
+        padding: 6.5
     },
 
-    description:{
+    description: {
         marginTop: 5,
-        color:COLORS.TEXT_BLACK,
-        fontSize:12,
-        fontWeight:'600'
+        color: COLORS.TEXT_BLACK,
+        fontSize: 12,
+        fontWeight: '600'
     },
 
-    icon:{
-        color:COLORS.TEXT_BLACK,
+    icon: {
+        color: COLORS.TEXT_BLACK,
     },
 
-    contactText:{
-        color:COLORS.TEXT_BLACK,
+    contactText: {
+        color: COLORS.TEXT_BLACK,
         marginLeft: 5,
     },
 
-    contact:{
+    contact: {
         marginTop: 2.5,
         flexDirection: 'row',
         alignItems: 'center',
     },
 
-    companyName:{
-        fontSize:18,
-        fontWeight:'900',
-        color:COLORS.TEXT_BLACK
+    companyName: {
+        fontSize: 18,
+        fontWeight: '900',
+        color: COLORS.TEXT_BLACK
     },
 
-    seeAll:{
+    seeAll: {
         fontSize: 16,
         fontWeight: 'bold',
-        color:COLORS.POSITIVE_COLOR
+        color: COLORS.POSITIVE_COLOR
     },
-    scrollableMenuName:{
+    scrollableMenuName: {
         fontSize: 23,
         fontWeight: 'bold',
-        color:COLORS.TEXT_BLACK
+        color: COLORS.TEXT_BLACK
     }
 
 }

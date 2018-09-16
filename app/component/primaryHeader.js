@@ -4,14 +4,13 @@ import { DIMENSION, COLORS, APPEARANCES } from '../module';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 
-
 //Property: backButton, backPressed,headerTittle,rightIcon,rightPressed
 
 export default class PrimaryHeader extends Component {
 
     render() {
         return (
-            <View style={styles.headerContainer}>
+            <View style={[styles.headerContainer,{backgroundColor:this.props.backgroundColor}]}>
                 <SafeAreaView style={styles.header}>
                     <View style={styles.row} >
                         <TouchableOpacity
@@ -19,7 +18,7 @@ export default class PrimaryHeader extends Component {
                         >
                             <MaterialIcons name={'keyboard-arrow-left'} style={styles.icon} />
                         </TouchableOpacity>
-                        <Text style={styles.headerTittle}>{this.props.headerTittle}</Text>
+                        <Text style={styles.headerTittle}>{this.props.headerTittle.toUpperCase()}</Text>
                         {
                             this.props.rightIcon ?
                                 <TouchableOpacity
@@ -66,7 +65,8 @@ const styles = {
     headerTittle: {
         color: COLORS.HEADER_TEXT_COLOR,
         fontWeight: '800',
-        fontSize: 18
+        fontSize: 22,
+        marginRight: DIMENSION(6),
     }
 }
 

@@ -137,7 +137,7 @@ const AppRouting = TabNavigator(
     swipeEnabled: false,
     initialRouteName: "NewFeedRouting",
     tabBarPosition: "bottom",
-    animationEnabled: true,
+    animationEnabled: false,
     activeTintColor: activeColor,
     inActiveTintColor: color,
     tabBarOptions: {
