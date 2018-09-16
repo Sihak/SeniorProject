@@ -47,7 +47,10 @@ const styles = StyleSheet.create({
         width: DIMENSION(83),
         backgroundColor: 'rgba(255,255,255,1)',
         paddingLeft: 15,
-        borderRadius: 10,
+        borderRadius: 8,
+        // borderWidth: 0.8,
+        borderColor: '#333'
+
     },
 });
 export default SearchBox;

@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import TabHeader from '../../component/tabHeader';
 import { DIMENSION, APPEARANCES, COLORS } from '../../module';
 import ScrollableMenu from '../../component/scrollableMenu';
-
+import SearchBox from '../../component/searchBox'
 export default class NewFeed extends Component {
   constructor(props) {
     super(props);
@@ -58,12 +58,14 @@ export default class NewFeed extends Component {
           tittle={'Food'}
         />
         <ScrollableMenu
+
           seeAllPressed={() => this.navigate('List', 'Street Food', COLORS.DARK_GREEN,true)}
           itemPressed={() => this.props.navigation.navigate('ViewDetail', {
             backgroundColor: COLORS.DARK_GREEN,
           })}
           tittle={'Street Food'}
         />
+
       </ScrollView>
     );
   }

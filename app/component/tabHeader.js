@@ -6,8 +6,6 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 //Property:  headerTittle, icon
 
 export default class TabHeader extends Component {
-
-
     render() {
         return (
             <View style={styles.headerContainer}>
