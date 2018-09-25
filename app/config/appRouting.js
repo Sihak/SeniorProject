@@ -5,6 +5,7 @@ import NewFeedRouting from "./newFeedRouting";
 import { COLORS } from '../module';
 import {View} from 'react-native';
 import MapRouting from "./mapRouting";
+import MeRouting from "./meRouting";
 
 const color = "rgba(0,0,0,0.3)";
 const activeColor = COLORS.POSITIVE_COLOR;
@@ -109,7 +110,7 @@ const AppRouting = TabNavigator(
       }
     },
     MeRouting: {
-      screen: NewFeedRouting,
+      screen: MeRouting,
       navigationOptions: {
         title: "Me",
         tabBarIcon: ({ focused }) =>

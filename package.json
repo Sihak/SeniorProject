@@ -12,11 +12,10 @@
     "mobx-react": "^5.2.5",
     "react": "16.4.1",
     "react-native": "0.56.0",
-
+    "react-native-actionsheet": "^2.4.2",
+    "react-native-image-picker": "^0.26.10",
     "react-native-maps": "^0.21.0",
-
     "react-native-parallax-header": "^1.0.6",
-
     "react-native-snap-carousel": "^3.7.2",
     "react-native-vector-icons": "^5.0.0",
     "react-navigation": "^2.12.1"

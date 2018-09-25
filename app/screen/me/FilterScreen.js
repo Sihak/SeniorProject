@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, SafeAreaView } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Locations from './PlacesJSON';
+import Locations from './PlaceStore';
 import PrimaryHeader from '../../component/primaryHeader.js';
 
-class SelectPlace extends Component {
+class SelectPlaceScreen extends Component {
     onSelectData = (forShow, name) => {
         this.props.navigation.state.params.returnData(forShow, name);
         this.props.navigation.goBack()
@@ -14,10 +14,10 @@ class SelectPlace extends Component {
         // console.log('PLACE', PlaceStore.places)
         return (
             <View style={{ flex: 1, backgroundColor:'#fff' }}>
-                <PrimaryHeader
+                  <PrimaryHeader
                     backgroundColor = {this.props.navigation.state.params.backgroundColor}
                     backPressed={() => this.props.navigation.goBack()}
-                    headerTittle={'Drinks'}
+                    headerTittle={'LOCATIONS'}
                 />
                 <FlatList
                     data={Locations}
@@ -51,5 +51,5 @@ const styles = StyleSheet.create({
     }
 });
 
-export default SelectPlace;
+export default SelectPlaceScreen;
 

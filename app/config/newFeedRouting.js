@@ -3,6 +3,8 @@ import NewFeed from '../screen/newFeed';
 import SelectPlace from '../screen/newFeed/selectPlace';
 import ListRouting from './listRouting';
 import ViewDetails from '../screen/newFeed/ViewDetails';
+import AddReview from '../screen/newFeed/AddReview';
+import ListMenu from '../screen/newFeed/ListMenu';
 const NewFeedRouting = createStackNavigator({
     NewFeed:{
         screen: NewFeed,
@@ -15,7 +17,19 @@ const NewFeedRouting = createStackNavigator({
     },
     ViewDetail: {
         screen:ViewDetails
-    }
+    },
+    AddReview:{
+        screen:AddReview
+    },
+    ReviewList: {
+        screen:SelectPlace
+    },
+    ViewReview:{
+        screen:SelectPlace
+    },
+    ListMenu:{
+       screen:ListMenu
+    },
 
 
 },{
