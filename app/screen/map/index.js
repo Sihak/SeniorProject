@@ -13,7 +13,7 @@ class MapScreen extends Component {
                 <MapComponent
                     image={require('../../asset/images/FiredTrunk.png')}
                 />
-                <View style={styles.searchBottom}>
+                <View style={styles.searchBoxContainer}>
                     <SearchBox
                     placeholder={'search'}
                     />
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
         // backgroundColor: '#2c3e50',
     },
-    searchBottom:{
+    searchBoxContainer:{
         position:'absolute',
         top: DIMENSION(15),
         left: DIMENSION(5),

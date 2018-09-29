@@ -25,8 +25,8 @@ export default class AddDescription extends Component {
           <TextInput
             autoFocus={true} 
             multiline={true}
-            numberOfLines = {10}
-            placeholder={'Description...'}
+            maxLength = {1000}
+            placeholder={'Description...(1000 characters)'}
             style={styles.reviewBox} />
         </View>
         <PrimaryButton 
@@ -47,7 +47,7 @@ const styles = {
     color: '#333',
     fontSize: 16,
     width:DIMENSION(100),
-    height: DIMENSION(70),
+    height: DIMENSION(80),
   },
   submitButton:{
     padding:15,

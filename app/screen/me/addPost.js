@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { COLORS, DIMENSION, APPEARANCES } from '../../module';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
@@ -87,7 +87,7 @@ class AddPostScreen extends Component {
                     backPressed={() => this.props.navigation.goBack()}
                     headerTittle={'LOCATIONS'}
                 />
-                <View
+                <ScrollView
                     style={styles.container}>
                     <View style={styles.form}>
                         <View style={styles.textInput}>
@@ -151,7 +151,7 @@ class AddPostScreen extends Component {
                     destructiveButtonIndex={0}
                     onPress={(index) => { this.onSelectBusinessType(index) }}
                 />
-                </View>
+                </ScrollView>
               
             </View>
 

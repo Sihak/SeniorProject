@@ -29,8 +29,8 @@ export default class AddReview extends Component {
           <TextInput
             autoFocus={true} 
             multiline={true}
-            numberOfLines = {10}
-            placeholder={'I Think...'}
+            maxLength = {500}
+            placeholder={'I Think...(500 characters)'}
             style={styles.reviewBox} />
         </View>
         <PrimaryButton 

@@ -55,6 +55,7 @@ const styles = {
     },
     headerContainer: {
         backgroundColor: COLORS.PRIMARY_COLOR,
+        borderBottomWidth:0.2
     },
     header: {
         width: DIMENSION(95),

@@ -16,12 +16,12 @@ import TabHeader from '../../component/tabHeader';
 // create a component
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
-class ViewDetails extends Component {
+class EditPostScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            illustration: this.props.navigation.state.params.illustration,
-            tittle: this.props.navigation.state.params.tittle,
+            illustration:[],
+            restaurantName: '',
             loading: true,
         }
     }
@@ -38,7 +38,7 @@ class ViewDetails extends Component {
 
                 </View>
                 <View style={{ padding: 15, flex: 1 }}>
-                    <Text style={styles.tittle} >{this.props.navigation.state.params.tittle}</Text>
+                    <Text style={styles.tittle} >{'Restaurant Name'}</Text>
                     <View style={styles.cardTittleContainer}>
                         <View style={[styles.locationContainer, { paddingTop: APPEARANCES.MARGIN - 5, justifyContent: 'space-between' }]}>
                             <View style={[styles.locationContainer, { marginTop: 5 }]} >
@@ -71,11 +71,10 @@ class ViewDetails extends Component {
                     <ReviewComponent
                         addReview={() => this.props.navigation.navigate('AddReview')}
                         tittle={'Reviews'}
-                        seeAllPressed={() => this.props.navigation.navigate('ListReview')}
+                        seeAllPressed={() => this.props.navigation.navigate('ReviewList')}
                         itemPressed={() => this.props.navigation.navigate('ViewReview')}
                     />
                 </View>
-
             </ScrollView>
             <SafeAreaView style={[styles.headerContainer, APPEARANCES.SHADOW]}>
                 <TouchableOpacity
@@ -179,4 +178,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default ViewDetails;
+export default EditPostScreen;

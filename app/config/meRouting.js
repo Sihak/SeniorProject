@@ -3,6 +3,7 @@ import MeScreen from '../screen/me';
 import AddPostScreen from '../screen/me/addPost';
 import SelectPlaceScreen from '../screen/me/FilterScreen';
 import AddDescription from '../screen/me/addDescription';
+import EditPostScreen from '../screen/me/editPost';
 
 const MeRouting = createStackNavigator({
   Me:{
@@ -17,6 +18,9 @@ const MeRouting = createStackNavigator({
 },
 AddDescription:{
     screen:AddDescription
+},
+EditPost:{
+    screen:EditPostScreen
 }
 
 

@@ -49,7 +49,7 @@ class MeScreen extends Component {
                         renderItem={({ item }) => {
                             return (
                                 <TouchableOpacity
-                                    onPress={() => this.props.navigation.navigate('AddPost')}
+                                    onPress={() => this.props.navigation.navigate('EditPost')}
                                     style={[styles.post, APPEARANCES.SHADOW,{borderRightColor:'#E32557',borderRightWidth:5,borderLeftWidth:5,borderLeftColor:'#5EB6EE'}]}>
                                     <View style={styles.logoContainer} >
                                         <Image style={styles.logo} source={require('../../asset/images/store.png')} />

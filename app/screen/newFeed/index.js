@@ -23,6 +23,7 @@ export default class NewFeed extends Component {
           icon={'notifications'}
           headerTittle={'New Feed'}
         />
+        
         <ScrollView style={{ flex: 1, backgroundColor: COLORS.MAIN_BACKGROUND_COLOR }}>
           <View style={styles.featureButtonContainer}>
             <TouchableOpacity
