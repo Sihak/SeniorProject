@@ -8,8 +8,15 @@ export default class AddDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      description:null,
     };
   }
+
+
+  submit = () => {
+    this.props.navigation.state.params.insertDescription(this.state.description);
+    this.props.navigation.goBack()
+}
 
   render() {
     return (
@@ -23,6 +30,8 @@ export default class AddDescription extends Component {
        </View>
         <View style={[{paddingTop:15},APPEARANCES.SHADOW]}>
           <TextInput
+            value = {this.props.navigation.state.params.description}
+            onChangeText= {(value) => this.setState({description:value}) }
             autoFocus={true} 
             multiline={true}
             maxLength = {1000}
@@ -32,7 +41,7 @@ export default class AddDescription extends Component {
         <PrimaryButton 
         
         pressed = {() => {
-
+          this.submit()
         }}
         tittle = {'Submit'}
         />

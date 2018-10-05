@@ -1,73 +1,89 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity, TextInput, ScrollView, } from 'react-native';
 import { COLORS, DIMENSION, APPEARANCES } from '../../module';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
 import PrimaryHeader from '../../component/primaryHeader';
-var ImagePicker = require('react-native-image-picker');
-
+import ImagePicker from 'react-native-image-picker';
+import { observer, inject } from 'mobx-react'
 var options = {
     title: 'Select Avatar',
     storageOptions: {
-      skipBackup: true,
-      path: 'images'
+        skipBackup: true,
+        path: 'images'
     }
-  };
-
+};
+@inject('restaurant')
+@observer
 class AddPostScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            businessName: null,
             businessType: null,
             logo: null,
             cover: null,
             location: null,
             selectedLocation: null,
-            businessType:null,
+            businessType: null,
+            description: null,
+            mapLocation: null,
         }
     }
 
-    showImagePicker(){
-       ImagePicker.showImagePicker(options, (response) => {
-         console.log('Response = ', response);
-       
-         if (response.didCancel) {
-           console.log('User cancelled image picker');
-         }
-         else if (response.error) {
-           console.log('ImagePicker Error: ', response.error);
-         }
-         else if (response.customButton) {
-           console.log('User tapped custom button: ', response.customButton);
-         }
-         else {
-           let source = { uri: response.uri };
-         }
-       });
+    showImagePicker(type) {
+        ImagePicker.showImagePicker(options, (response) => {
+            console.log('Response = ', response);
+
+            if (type === 'logo') {
+                this.setState({ logo: response })
+            } else {
+                this.setState({ cover: response })
+            }
+
+            if (response.didCancel) {
+                if (type === 'logo') {
+                    this.setState({ logo: null })
+                } else {
+                    this.setState({ cover: null })
+                }
+            }
+            else if (response.error) {
+                if (type === 'logo') {
+                    this.setState({ logo: null })
+                } else {
+                    this.setState({ cover: null })
+                }
+            }
+        });
     }
 
     showActionSheet = () => {
         this.ActionSheet.show()
     }
 
-    onSelectBusinessType(index){
-        switch (index){
-            case 1 : return( this.setState({businessType:'drinks'}) );
-            case 2 : return( this.setState({businessType:'foods'}) );
-            case 3 : return( this.setState({businessType:'shopping'}) );
-            case 4 : return( this.setState({businessType:'streetFoods'}) );
+    onSelectBusinessType(index) {
+        switch (index) {
+            case 1: return (this.setState({ businessType: 'drinks' }));
+            case 2: return (this.setState({ businessType: 'foods' }));
+            case 3: return (this.setState({ businessType: 'shopping' }));
+            case 4: return (this.setState({ businessType: 'streetFoods' }));
         }
     }
 
-    showBusinessType(type){
-        switch (type){
-            case 'drinks' : return('Drinks');
-            case 'foods' : return('Foods');
-            case 'shopping' : return('Shopping');
-            case 'streetFoods' : return('Street Foods');
-
+    showBusinessType(type) {
+        switch (type) {
+            case 'drinks': return ('Drinks');
+            case 'foods': return ('Foods');
+            case 'shopping': return ('Shopping');
+            case 'streetFoods': return ('Street Foods');
         }
+    }
+    insertDescription(description) {
+        this.setState({
+            description: description
+        })
     }
 
     returnData(forShow, name) {
@@ -77,13 +93,31 @@ class AddPostScreen extends Component {
         })
     }
 
+    onConfirm() {
+        const { businessType, logo, cover, location, description, mapLocation, businessName } = this.state;
+        this.props.restaurant.addRestaurant(businessName,location,businessType,logo,cover,description,mapLocation);
+    }
+
+    getCurrentLocation() {
+        navigator.geolocation.getCurrentPosition((location) => {
+            console.log(location)
+            this.setState({
+                mapLocation: {
+                    latitude: location.coords.latitude,
+                    longitude: location.coords.longitude,
+                }
+            })
+        }, error => alert(JSON.stringify(error)))
+    }
+
     render() {
-        const { businessType, logo, cover, location } = this.state;
+        const { loading } = this.props.restaurant;
+        const { businessType, logo, cover, location, description, mapLocation, businessName } = this.state;
         return (
             <View style={{ flex: 1 }}>
                 {/* <Image resizeMode={'contain'} style={{ position: 'absolute' }} source={require('../../asset/img/postBG.jpg')} /> */}
                 <PrimaryHeader
-                    backgroundColor = {'#fff'}
+                    backgroundColor={'#fff'}
                     backPressed={() => this.props.navigation.goBack()}
                     headerTittle={'LOCATIONS'}
                 />
@@ -94,7 +128,7 @@ class AddPostScreen extends Component {
                             <Text style={styles.label}>Business Name</Text>
                             <TextInput
                                 style={[styles.textBox]}
-                                onChangeText={(value) => this.setState({ nameKh: value })}
+                                onChangeText={(value) => this.setState({ businessName: value })}
                                 autoCorrect={false}
                                 autoCapitalize={'none'}
                                 placeholder={'Your business name'}
@@ -106,31 +140,48 @@ class AddPostScreen extends Component {
                             })}
                             style={styles.textInput} >
                             <Text style={styles.label}>Location</Text>
-                            <Text style={[styles.textInPicker, location && { color: COLORS.TEXT_DARK }]}>{location ? location : 'Location'}</Text>
+                            <Text style={[styles.textInPicker, location && { color: '#333' }]}>{location ? location : 'Location'}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             onPress={this.showActionSheet}
                             style={styles.textInput} >
                             <Text style={styles.label}>Type</Text>
-                            <Text style={[styles.textInPicker, businessType && { color: COLORS.TEXT_DARK }]}>{businessType ? this.showBusinessType(businessType) : 'Business Type'}</Text>
+                            <Text style={[styles.textInPicker, businessType && { color: '#333' }]}>{businessType ? this.showBusinessType(businessType) : 'Business Type'}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={() => this.showImagePicker()}
+                            onPress={() => this.showImagePicker('logo')}
                             style={styles.textInput} >
                             <Text style={styles.label}>Logo</Text>
-                            <Text style={[styles.textInPicker, logo && { color: COLORS.TEXT_DARK }]}>{logo ? 'Image' : 'Select your logo'}</Text>
+                            <Text style={[styles.textInPicker, logo && { color: '#333' }]}>{logo ? logo.fileName : 'Select your logo'}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            // onPress={() => this.showActionSheet('cover')}
+                            onPress={() => this.showImagePicker('cover')}
                             style={styles.textInput} >
                             <Text style={styles.label}>Cover</Text>
-                            <Text style={[styles.textInPicker, cover && { color: COLORS.TEXT_DARK }]}>{cover ? 'Image' : 'Select your cover'}</Text>
+                            <Text style={[styles.textInPicker, cover && { color: '#333' }]}>{cover ? cover.fileName : 'Select your cover'}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={() => this.props.navigation.navigate('AddDescription')}
+                            onPress={() => this.getCurrentLocation()}
+                            style={styles.textInput} >
+                            <Text style={styles.label}>Map</Text>
+                            <Text
+                                allowFontScaling={true}
+                                ellipsizeMode={'tail'}
+                                numberOfLines={1}
+                                style={[styles.textInPicker, mapLocation && { color: '#333' }]}>{mapLocation ? 'Inserted' : 'Get restaurant location'}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => this.props.navigation.navigate('AddDescription', {
+                                description: description,
+                                insertDescription: this.insertDescription.bind(this)
+                            })}
                             style={styles.textInput} >
                             <Text style={styles.label}>Description</Text>
-                            <Text style={[styles.textInPicker, cover && { color: COLORS.TEXT_DARK }]}>{cover ? 'Image' : 'About your business'}</Text>
+                            <Text
+                                allowFontScaling={true}
+                                ellipsizeMode={'tail'}
+                                numberOfLines={1}
+                                style={[styles.textInPicker, description && { color: '#333' }]}>{description ? 'Article' : 'About your business'}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.policy}>
@@ -141,18 +192,20 @@ class AddPostScreen extends Component {
                             When you click on confirm button, it means you have accepted all terms and condition of our Policy of this app.
                             Our app will get your business's information to store in our database, but don't worry will encrypt all your data and won't spread it.
                             </Text>
-                        <TouchableOpacity style={styles.acceptButton}><Text style={styles.acceptButtonText}>Confirm</Text></TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => this.onConfirm()}
+                            style={styles.acceptButton}><Text style={styles.acceptButtonText}>Confirm</Text></TouchableOpacity>
                     </View>
                     <ActionSheet
-                    ref={o => { this.ActionSheet = o }}
-                    title={'Select your business Type'}
-                    options={['Cancel', 'Drinks', 'Food', 'Shopping', 'Street Foods']}
-                    cancelButtonIndex={0}
-                    destructiveButtonIndex={0}
-                    onPress={(index) => { this.onSelectBusinessType(index) }}
-                />
+                        ref={o => { this.ActionSheet = o }}
+                        title={'Select your business Type'}
+                        options={['Cancel', 'Drinks', 'Food', 'Shopping', 'Street Foods']}
+                        cancelButtonIndex={0}
+                        destructiveButtonIndex={0}
+                        onPress={(index) => { this.onSelectBusinessType(index) }}
+                    />
                 </ScrollView>
-              
+
             </View>
 
         );
@@ -198,7 +251,7 @@ const styles = StyleSheet.create({
         width: DIMENSION(100),
         backgroundColor: '#fff',
         fontSize: 18,
-        color: 'rgba(0,0,0,0.18)'
+        color: 'rgba(0,0,0,0.18)',
     },
     textInput: {
         paddingVertical: DIMENSION(2),

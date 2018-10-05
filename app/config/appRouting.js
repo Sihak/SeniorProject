@@ -38,28 +38,6 @@ const AppRouting = TabNavigator(
       }
     },
 
-    SearchRouting: {
-      screen: NewFeedRouting,
-      navigationOptions: {
-        title: "Search",
-        tabBarIcon: ({ focused }) =>
-          focused ? (
-            <MaterialIcons
-              name="search"
-              size={iconSize + _extraSize}            
-              iconStyle={{ paddingBottom: 0, paddingTop: 0 }}
-              color={activeColor}
-            />
-          ) : (
-              <MaterialIcons
-                name="search"
-                size={iconSize}
-                iconStyle={{ paddingBottom: 0, paddingTop: 0 }}
-                color={color}
-              />
-            )
-      }
-    },
 
     Map: {
       screen: MapRouting,

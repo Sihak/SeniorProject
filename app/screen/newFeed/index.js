@@ -20,7 +20,6 @@ export default class NewFeed extends Component {
       <View style={{ flex: 1 }}>
         <TabHeader
           iconPressed={() => this.props.navigation.navigate('notification')}
-          icon={'notifications'}
           headerTittle={'New Feed'}
         />
         

@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '9.0'
 
 target 'bisProject' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
@@ -27,6 +27,10 @@ target 'bisProject' do
     'RCTWebSocket',
   ]
 
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Auth'
   # React Native third party dependencies podspecs
   pod 'DoubleConversion', :podspec => "#{rn_path}/third-party-podspecs/DoubleConversion.podspec"
   pod 'glog', :podspec => "#{rn_path}/third-party-podspecs/glog.podspec"
@@ -34,13 +38,17 @@ target 'bisProject' do
   # "The name of the given podspec `GLog` doesn't match the expected one `glog`"
   # Use the following line instead:
   #pod 'GLog', :podspec => "#{rn_path}/third-party-podspecs/GLog.podspec"
-  pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
+  #pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
 
   # react-native-maps dependencies
   pod 'react-native-maps', path: rn_maps_path
   pod 'react-native-google-maps', path: rn_maps_path  # Remove this line if you don't want to support GoogleMaps on iOS
   pod 'GoogleMaps'  # Remove this line if you don't want to support GoogleMaps on iOS
   pod 'Google-Maps-iOS-Utils' # Remove this line if you don't want to support GoogleMaps on iOS
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
+  pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
+
 end
 
 post_install do |installer|
