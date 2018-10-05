@@ -11,8 +11,8 @@ const APPEARANCE = {
       height: 5
     },
     shadowRadius: 5,
-    shadowOpacity: 4,
-    elevation: 5
+    shadowOpacity: 0.8,
+    elevation: 3
   },
   START_LINE_GRADIENT_V2:{x: 1, y: 0.5},
   END_LINE_GRADIENT_V2:{x: 0, y: 0.25},

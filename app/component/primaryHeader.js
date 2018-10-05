@@ -44,7 +44,7 @@ const styles = {
         color: COLORS.HEADER_TEXT_COLOR
     },
     icon: {
-        color: COLORS.HEADER_TEXT_COLOR,
+        color: '#333',
         fontWeight: '900',
         fontSize: 45
     },
@@ -55,6 +55,7 @@ const styles = {
     },
     headerContainer: {
         backgroundColor: COLORS.PRIMARY_COLOR,
+        borderBottomWidth:0.2
     },
     header: {
         width: DIMENSION(95),
@@ -63,7 +64,7 @@ const styles = {
         paddingHorizontal: APPEARANCES.PADDING_HORIZONTAL,
     },
     headerTittle: {
-        color: COLORS.HEADER_TEXT_COLOR,
+        color: '#333',
         fontWeight: '800',
         fontSize: 22,
         marginRight: DIMENSION(6),

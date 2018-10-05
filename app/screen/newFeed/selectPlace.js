@@ -13,9 +13,9 @@ class SelectPlace extends Component {
     render() {
         // console.log('PLACE', PlaceStore.places)
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, backgroundColor:'#fff' }}>
                 <PrimaryHeader
-                    backgroundColor = {this.props.navigation.state.params.backgroundColor}
+                    backgroundColor = {'#fff'}
                     backPressed={() => this.props.navigation.goBack()}
                     headerTittle={'Drinks'}
                 />

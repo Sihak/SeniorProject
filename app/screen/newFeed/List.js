@@ -34,7 +34,7 @@ export default class ListScreen extends Component {
         return (
             <View style={{ flex: 1, backgroundColor: COLORS.MAIN_BACKGROUND_COLOR }}>
                 <PrimaryHeader
-                    backgroundColor={this.props.navigation.state.params.backgroundColor}
+                    backgroundColor={'#fff'}
                     backPressed={() => this.props.navigation.popToTop()}
                     headerTittle={this.props.navigation.state.params.type}
                 />

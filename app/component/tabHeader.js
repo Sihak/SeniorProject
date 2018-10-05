@@ -35,6 +35,7 @@ const styles = {
     },
     headerContainer: {
         backgroundColor: COLORS.TAB_HEADER_BACKGROUND,
+        borderBottomWidth: 0.2,
     },
     header: {
         width: DIMENSION(95),

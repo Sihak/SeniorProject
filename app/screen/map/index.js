@@ -24,6 +24,7 @@ class MapScreen extends Component {
                     listRestaurant={this.state.isListingRestaurant}
                     image={require('../../asset/images/map.png')}
                 />
+
                 {/* <TouchableWithoutFeedback
                     style={{ backgroundColor: 'red', width: 200, height: 200, position: 'absolute' }}
                     onPress={this.handlePress}>
@@ -36,6 +37,7 @@ class MapScreen extends Component {
                     </View>
                 </TouchableWithoutFeedback> */}
                 <View style={styles.searchBottom}>
+
                     <SearchBox
                         placeholder={'search'}
                     />
@@ -70,9 +72,11 @@ const styles = StyleSheet.create({
     container: {
 
     },
+
     searchBottom: {
         position: 'absolute',
         top: DIMENSION(11),
+
         left: DIMENSION(5),
         // backgroundColor:'red'
     },

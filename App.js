@@ -11,6 +11,7 @@ import AppRouting from './app/config/appRouting';
 import { YellowBox } from 'react-native';
 import { Provider } from 'mobx-react';
 import store from './app/store';
+import LoginSignUpRouting from './app/config/loginSignUp';
 
 
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Class RCTCxxModule', 'Method `jumpToIndex`', 'Module RCTImageLoader']);
@@ -20,7 +21,8 @@ export default class App extends Component {
   render() {
     return (
       <Provider {...store} >
-        <AppRouting />
+        {/* <AppRouting /> */}
+        <LoginSignUpRouting />
       </Provider>
     );
   }
