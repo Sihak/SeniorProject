@@ -44,6 +44,7 @@
 		301251DC296E4F2C8A2ED063 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F248C98F9274E26AA024C15 /* FontAwesome5_Brands.ttf */; };
 		3829A5643EA0450898EC11FD /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D387D04AA3D4C84B93AE6F1 /* EvilIcons.ttf */; };
 		397ABDC2654A4148BBECFFCA /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D10A9231274B73AFC42869 /* libRNFirebase.a */; };
+		3E7373CE2171F07400EA0659 /* libfishhook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6841FA4F8DC00B85C8A /* libfishhook.a */; };
 		4343C214E5594364A3EEFA98 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94C2A130396549DB9390019D /* SimpleLineIcons.ttf */; };
 		4501EB8FBED54C8C816A49E6 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D0FCE3F655F424EBD30FC09 /* FontAwesome5_Solid.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
@@ -428,6 +429,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E7373CE2171F07400EA0659 /* libfishhook.a in Frameworks */,
 				6315E9BB2160B7680043B5A4 /* libRNFetchBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -1291,7 +1293,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		11109C55C872633B66BB92D7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
