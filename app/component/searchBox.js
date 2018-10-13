@@ -4,17 +4,47 @@ import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { COLORS, APPEARANCES, DIMENSION } from '../module';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-
+const ENTRIES2 = [
+	{
+		title: 'case 2',
+		latitude: 12.546932,
+		longitude: 104.920049,
+	},
+	{
+		title: 'data 2',
+		latitude: 13.546932,
+		longitude: 104.920049,
+	},
+	{
+		title: 'Favourites ',
+		latitude: 14.546932,
+		longitude: 104.920049,
+	},
+	{
+		title: 'filter landscapes 1',
+		latitude: 14.546932,
+		longitude: 104.920049,
+	},
+]
 //Properties: search,onSearchPressed
 class SearchBox extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            searchFood: [],
+            searchDrink: [],
+            searchStreetFood: [],
         }
     }
-
-
+    searchFilter(value){
+        const data = ENTRIES2;
+        const dataFiltered = data.filter(
+            ENTRIES2 =>
+        ENTRIES2.title.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        )
+        console.log(dataFiltered);
+    }
 
     render() {
         return (
@@ -23,7 +53,7 @@ class SearchBox extends Component {
                     style={[styles.searchInput, APPEARANCES.SHADOW]}
                     placeholder={this.props.placeholder}
                     placeholderTextColor={'rgba(0,0,0,.5)'}
-                    onChangeText={(value) => this.props.search(value)}
+                    onChangeText={(value) => this.searchFilter(value)}
                 />
                 <TouchableOpacity
                     onPress={() => this.props.onSearchPressed}

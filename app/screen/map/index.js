@@ -7,13 +7,14 @@ import SearchBox from '../../component/searchBox';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { View } from 'react-native-animatable';
 
-
-// create a component
 class MapScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isListingRestaurant: true,
+            searchFood: [],
+            searchDrink: [],
+            searchStreetFood: [],
         }
     }
     
@@ -40,6 +41,7 @@ class MapScreen extends Component {
 
                     <SearchBox
                         placeholder={'search'}
+                        // dataSearch={this.props.dataMap}
                     />
                 </View>
                 <TouchableOpacity

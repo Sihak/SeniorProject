@@ -35,7 +35,7 @@ class ViewDetails extends Component {
             <ScrollView>
                 <View style={styles.mapHeader}>
                     <Image source={require('../../asset/images/map.jpg')} style={styles.map} />
-
+                    
                 </View>
                 <View style={{ padding: 15, flex: 1 }}>
                     <Text style={styles.tittle} >{this.props.navigation.state.params.tittle}</Text>
