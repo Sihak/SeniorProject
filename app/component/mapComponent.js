@@ -43,7 +43,9 @@ class MapComponent extends Component {
 			data: ENTRIES2,
 			detail: null,
 			open: false,
-			// rigi
+			longitude: null,
+			latitude:null
+
 		};
 	}
 	componentWillMount = () => {
@@ -53,7 +55,7 @@ class MapComponent extends Component {
 		navigator.geolocation.getCurrentPosition(
 			(position) => {
 				let currentUserPosition = position.coords;
-				console.log("Hello", currentUserPosition)
+				console.log("currentUserPosition", currentUserPosition)
 				this.setState({
 					longitude: currentUserPosition.longitude,
 					latitude: currentUserPosition.latitude
@@ -73,12 +75,11 @@ class MapComponent extends Component {
 		this.setState({ region: this.getRegion(), open: true, detail: 'hello' })
 	}
 	onClickMap(item) {
-		console.log('data:', item)
-		this.setState({ region: { ...this.state.region, latitude: item.latitude, longitude: item.longitude } })
+		this.setState({ region: { ...this.state.region, latitude: item.latitude-0.3, longitude: item.longitude } })
 	}
 	render() {
-		const { region } = this.props;
-		console.log(region);
+		// const { region } = this.props;
+		// console.log(region);
 
 		return (
 			<View style={styles.container}>
@@ -101,6 +102,7 @@ class MapComponent extends Component {
 						this.state.data.map((item, index) => {
 							return (
 								<MapView.Marker
+									key={index}
 									imageStyle={{ width: 1, height: 1 }}
 									coordinate={{
 										latitude: item.latitude,
@@ -134,9 +136,9 @@ class MapComponent extends Component {
 										</View>
 										<View style={styles.details}>
 											<Text style={styles.companyName}>Koi The</Text>
-											<Text style={styles.description}>
+											{/* <Text style={styles.description}>
 												{item.title}
-											</Text>
+											</Text> */}
 											<View style={styles.contact}>
 												<MaterialIcons style={styles.icon} name={'place'} />
 												<Text style={styles.contactText}>
@@ -181,7 +183,7 @@ const styles = StyleSheet.create({
 	card: {
 		marginVertical: 5,
 		width: DIMENSION(60),
-		height: DIMENSION(60),
+		height: DIMENSION(50),
 		borderRadius: 12,
 		overflow: 'hidden',
 		marginHorizontal: 10,

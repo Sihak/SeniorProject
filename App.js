@@ -21,8 +21,8 @@ export default class App extends Component {
   render() {
     return (
       <Provider {...store} >
-        {/* <AppRouting /> */}
-        <LoginSignUpRouting />
+        <AppRouting />
+        {/* <LoginSignUpRouting /> */}
       </Provider>
     );
   }
