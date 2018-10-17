@@ -37,21 +37,18 @@ export default class RatingComponent extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => this.onRate(3)}
-
                     disabled={!ratable}
                 >
                     <MaterialIcons name={'star'} style={[styles.rate, givenStar >= 3 && { color: activeColor }]} />
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => this.onRate(4)}
-
                     disabled={!ratable}
                 >
                     <MaterialIcons name={'star'} style={[styles.rate, givenStar >= 4 && { color: activeColor }]} />
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => this.onRate(5)}
-
                     disabled={!ratable}
                 >
                     <MaterialIcons name={'star'} style={[styles.rate, givenStar === 5 && { color: activeColor }]} />

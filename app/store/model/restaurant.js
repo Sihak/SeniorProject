@@ -11,17 +11,19 @@ export default class Restaurant  {
             businessName: businessName,
             location    : location,
             type        : type,
-            logoUrl     : getImageUrl(logo.uri,businessName,'logo'),
-            coverUrl    : getImageUrl(cover.uri,businessName,'cover'),
+            logoUrl     : logo,
+            coverUrl    : cover,
+            // logoUrl     : getImageUrl(logo.uri,businessName,'logo'),
+            // coverUrl    : getImageUrl(cover.uri,businessName,'cover'),
             mapLocation : mapLocation,
             description : description,
             termAndCondition : true,
         }
         console.log('RESTAURANT',restaurant)
         this.loading = true;
-        // insertRestaurant(restaurant).then(() => {
-        //     this.loading = false;
-        //     console.log('Added data Successfully')
-        // });
+        insertRestaurant(restaurant).then(() => {
+            this.loading = false;
+            console.log('Added data Successfully')
+        });
     }
 }
