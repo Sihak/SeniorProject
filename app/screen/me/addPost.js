@@ -5,6 +5,7 @@ import { COLORS, DIMENSION, APPEARANCES } from '../../module';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
 import PrimaryHeader from '../../component/primaryHeader';
+import Loading from '../../component/loading';
 import ImagePicker from 'react-native-image-picker';
 import { observer, inject } from 'mobx-react'
 var options = {
@@ -22,8 +23,8 @@ class AddPostScreen extends Component {
         this.state = {
             businessName: null,
             businessType: null,
-            logo: null,
-            cover: null,
+            logo: 'https://firebasestorage.googleapis.com/v0/b/camguide-686a9.appspot.com/o/01.jpg?alt=media&token=a5b19154-77ae-49b4-9fd4-8a5a36307537',
+            cover: 'https://firebasestorage.googleapis.com/v0/b/camguide-686a9.appspot.com/o/1.jpg?alt=media&token=722600b2-b7b2-4015-935b-a0ade849f295',
             location: null,
             selectedLocation: null,
             businessType: null,
@@ -130,6 +131,11 @@ class AddPostScreen extends Component {
         const { businessType, logo, cover, location, description, mapLocation, businessName } = this.state;
         return (
             <View style={{ flex: 1 }}>
+              {loading ?
+                    <Loading />
+                    : <View></View>
+
+                }
                 {/* <Image resizeMode={'contain'} style={{ position: 'absolute' }} source={require('../../asset/img/postBG.jpg')} /> */}
                 <PrimaryHeader
                     backgroundColor={'#fff'}

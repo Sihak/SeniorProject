@@ -12,8 +12,9 @@ export default class Restaurant  {
             businessName: businessName,
             location    : location,
             type        : type,
-            // logoUrl     : getImageUrl(logo.uri,businessName,'logo'),
-            // coverUrl    : getImageUrl(cover.uri,businessName,'cover'),
+            logoUrl     : logo,
+            coverUrl    : cover,
+
             mapLocation : mapLocation,
             description : description,
             termAndCondition : true,
