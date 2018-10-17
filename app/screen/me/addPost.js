@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity, TextInput, ScrollView, } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity, TextInput, ScrollView, Alert } from 'react-native';
 import { COLORS, DIMENSION, APPEARANCES } from '../../module';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
@@ -93,9 +93,24 @@ class AddPostScreen extends Component {
         })
     }
 
-    onConfirm() {
+    validation(){
         const { businessType, logo, cover, location, description, mapLocation, businessName } = this.state;
-        this.props.restaurant.addRestaurant(businessName,location,businessType,logo,cover,description,mapLocation);
+        if(businessType || logo || description || mapLocation || businessName){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    onConfirm() {
+        if(this.validation){
+            const { businessType, logo, cover, location, description, mapLocation, businessName } = this.state;
+            this.props.restaurant.addRestaurant(businessName,location,businessType,logo,cover,description,mapLocation);
+        }
+        else{
+            Alert.alert('Please enter your information properly.')
+        }
     }
 
     getCurrentLocation() {

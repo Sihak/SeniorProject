@@ -1,27 +1,46 @@
 import { observable, action } from 'mobx';
 import { insertRestaurant } from '../services/restaurant';
-import { getImageUrl } from '../../utilities';
+import { restaurantDB } from '../services/base';
+import { getImageUrl, pushToArray } from '../../utilities';
+// import moment from ''
 export default class Restaurant  {
+    @observable stores = [];
     @observable loading = false;
     @action addRestaurant(businessName,location,type,logo,cover,description,mapLocation){
-        console.log('LOGO',logo)
-        console.log('COVER',cover)
-
         const restaurant = {
+            dateCreated : new Date(),
             businessName: businessName,
             location    : location,
             type        : type,
-            logoUrl     : getImageUrl(logo.uri,businessName,'logo'),
-            coverUrl    : getImageUrl(cover.uri,businessName,'cover'),
+            // logoUrl     : getImageUrl(logo.uri,businessName,'logo'),
+            // coverUrl    : getImageUrl(cover.uri,businessName,'cover'),
             mapLocation : mapLocation,
             description : description,
             termAndCondition : true,
         }
-        console.log('RESTAURANT',restaurant)
         this.loading = true;
-        // insertRestaurant(restaurant).then(() => {
-        //     this.loading = false;
-        //     console.log('Added data Successfully')
-        // });
+        insertRestaurant(restaurant).then(() => {
+            this.loading = false;
+        });
     }
+
+    @action getRestaurant(type){
+        if(type){
+            this.loading = true;
+            restaurantDB()
+            .where('type','===',type)
+            .onSnapshot(stores => {
+                this.stores = pushToArray(stores);
+                this.loading = false;
+            })
+        }else {
+            this.loading = true;
+            restaurantDB()
+            .onSnapshot(stores => {
+                this.stores = pushToArray(stores);
+                this.loading = false;
+            })
+        };
+       
+    };
 }

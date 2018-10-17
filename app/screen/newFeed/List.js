@@ -6,7 +6,10 @@ import SearchBox from '../../component/searchBox';
 import { COLORS, APPEARANCES, DIMENSION } from '../../module';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import testingData from '../../asset/testingData';
+import { observer, inject } from 'mobx-react'
 
+@inject('restaurant')
+@observer
 export default class ListScreen extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +19,9 @@ export default class ListScreen extends Component {
         };
     }
 
+    componentDidMount(){
+        this.props.restaurant.getRestaurant();
+    }
 
     itemSeperator() {
         return (
@@ -31,6 +37,7 @@ export default class ListScreen extends Component {
     }
 
     render() {
+        console.log('STORES',this.props.restaurant.stores)
         return (
             <View style={{ flex: 1, backgroundColor: COLORS.MAIN_BACKGROUND_COLOR }}>
                 <PrimaryHeader
