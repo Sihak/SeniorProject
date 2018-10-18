@@ -6,3 +6,9 @@ export function restaurantDB(){
     )
 };
 
+export function auth(){
+    return (
+        firebase.auth()
+    )
+}
+
