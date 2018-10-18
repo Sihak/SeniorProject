@@ -25,7 +25,7 @@ class Card extends Component {
                             style={cards.cardTittle} > {this.props.tittle} </Text>
                         <View style={cards.locationContainer} >
                             <Ionicons name='md-pin' style={cards.locationIcon} />
-                            <Text style={cards.locationDescription}> Siemreap </Text>
+                            <Text style={cards.locationDescription}> { this.props.location } </Text>
                         </View>
                     </View>
                     {/* <View style={cards.desriptionContainer}>

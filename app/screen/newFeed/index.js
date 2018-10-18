@@ -4,6 +4,9 @@ import TabHeader from '../../component/tabHeader';
 import { DIMENSION, APPEARANCES, COLORS } from '../../module';
 import ScrollableMenu from '../../component/scrollableMenu';
 import SearchBox from '../../component/searchBox'
+import { observer, inject } from 'mobx-react';
+@inject('restaurant')
+@observer
 export default class NewFeed extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +19,7 @@ export default class NewFeed extends Component {
   }
 
   render() {
+    const { drinks, foods, streetFoods,loading } = this.props.restaurant;
     return (
       <View style={{ flex: 1 }}>
         <TabHeader
@@ -26,13 +30,13 @@ export default class NewFeed extends Component {
         <ScrollView style={{ flex: 1, backgroundColor: COLORS.MAIN_BACKGROUND_COLOR }}>
           <View style={styles.featureButtonContainer}>
             <TouchableOpacity
-              onPress={() => this.navigate('List', 'Drinks', COLORS.ORANGE_YELLOW, false)}
+              onPress={() => this.navigate('List', 'drinks', COLORS.ORANGE_YELLOW, false)}
               style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.ORANGE_YELLOW }]}>
               <Image source={require('../../asset/images/drinks.png')} style={styles.featureIcon} />
               <Text style={styles.label} >Drink</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.navigate('List', 'Food', COLORS.LIGHT_BLUE, false)}
+              onPress={() => this.navigate('List', 'foods', COLORS.LIGHT_BLUE, false)}
               style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.LIGHT_BLUE }]}>
               <Image source={require('../../asset/images/food.png')} style={styles.featureIcon} />
               <Text style={styles.label} >Food</Text>
@@ -45,6 +49,7 @@ export default class NewFeed extends Component {
             </TouchableOpacity>
           </View>
           <ScrollableMenu
+            data = {drinks}
             seeAllPressed={() => this.navigate('List', 'Drinks', COLORS.ORANGE_YELLOW, true)}
             itemPressed={() => this.props.navigation.navigate('ViewDetail', {
               backgroundColor: COLORS.ORANGE_YELLOW,
@@ -52,6 +57,7 @@ export default class NewFeed extends Component {
             tittle={'Drink'}
           />
           <ScrollableMenu
+            data = {foods}
             seeAllPressed={() => this.navigate('List', 'Food', COLORS.LIGHT_BLUE, true)}
             itemPressed={() => this.props.navigation.navigate('ViewDetail', {
               backgroundColor: COLORS.LIGHT_BLUE,
@@ -59,6 +65,7 @@ export default class NewFeed extends Component {
             tittle={'Food'}
           />
           <ScrollableMenu
+            data = {streetFoods}
             seeAllPressed={() => this.navigate('List', 'Street Food', COLORS.DARK_GREEN, true)}
             itemPressed={() => this.props.navigation.navigate('ViewDetail', {
               backgroundColor: COLORS.DARK_GREEN,

@@ -23,7 +23,7 @@ export default class ScrollableMenu extends Component {
                 </View>
                 <FlatList
                     showsHorizontalScrollIndicator={false}
-                    data={[1, 2, 3, 4, 5]}
+                    data={this.props.data}
                     keyExtractor={(index) => index.toString()}
                     horizontal={true}
                     style={[styles.list, APPEARANCES.SHADOW]}
@@ -34,23 +34,23 @@ export default class ScrollableMenu extends Component {
                             style={[styles.card, APPEARANCES.SHADOW]}>
                                 <View style={styles.coverContainer}>
                                     <Image
-                                        style={styles.cover} source={require('../asset/images/coverSample.jpg')} />
+                                        style={styles.cover} source={{uri:item.coverUrl}} />
                                 </View>
                                 <View style={styles.details}>
-                                    <Text style={styles.companyName}>Koi The</Text>
+                                    <Text style={styles.companyName}>{item.businessName}</Text>
                                     <Text style={styles.description}>
                                         Wanna try our new tastes ?
                                 </Text>
                                     <View style={styles.contact}>
                                         <MaterialIcons style={styles.icon} name={'place'} />
                                         <Text style={styles.contactText}>
-                                            Street 360, #44E0
+                                            {item.location}
                                     </Text>
                                     </View>
                                     <View style={styles.contact}>
                                         <MaterialIcons style={styles.icon} name={'call'} />
                                         <Text style={styles.contactText}>
-                                            (+855) 69 959 168
+                                            {item.contact}
                                     </Text>
                                     </View>
                                 </View>

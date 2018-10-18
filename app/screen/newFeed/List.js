@@ -15,12 +15,13 @@ export default class ListScreen extends Component {
         super(props);
         this.state = {
             selectedProvinceForShow: '',
-            seeAll: this.props.navigation.state.params.isSeeAll ? true : false
+            seeAll: this.props.navigation.state.params.isSeeAll ? true : false,
+            type  : this.props.navigation.state.params.type,
         };
     }
 
     componentDidMount(){
-        this.props.restaurant.getRestaurant();
+        this.props.restaurant.getRestaurant(this.state.type);
     }
 
     itemSeperator() {
@@ -37,7 +38,7 @@ export default class ListScreen extends Component {
     }
 
     render() {
-        console.log('STORES',this.props.restaurant.stores)
+        const { stores, loading } = this.props.restaurant;
         return (
             <View style={{ flex: 1, backgroundColor: COLORS.MAIN_BACKGROUND_COLOR }}>
                 <PrimaryHeader
@@ -62,17 +63,18 @@ export default class ListScreen extends Component {
 
                 <FlatList style={styles.body}
                     ItemSeparatorComponent={() => this.itemSeperator()}
-                    data={testingData}
+                    data={stores}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item }) =>
                         <Card
                             cardPressed={() => this.props.navigation.navigate('ViewDetail', {
-                                illustration: item.illustration,
-                                tittle: item.title,
+                                illustration: item.coverUrl,
+                                tittle: item.businessName,
                                 backgroundColor: this.props.navigation.state.params.backgroundColor,
                             })}
-                            cover={item.illustration}
-                            tittle={item.title}
+                            cover={item.coverUrl}
+                            tittle={item.businessName}
+                            location = {item.location}
                         />
                     }
                 />
