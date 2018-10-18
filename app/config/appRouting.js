@@ -6,6 +6,7 @@ import { COLORS } from '../module';
 import {View} from 'react-native';
 import MapRouting from "./mapRouting";
 import MeRouting from "./meRouting";
+import FavouriteRouting from "./favouriteRouting";
 
 const color = "rgba(0,0,0,0.3)";
 const activeColor = COLORS.POSITIVE_COLOR;
@@ -66,7 +67,7 @@ const AppRouting = TabNavigator(
     },
 
     FavouriteRouting: {
-      screen: NewFeedRouting,
+      screen: FavouriteRouting,
       navigationOptions: {
         title: "Favourite",
         tabBarIcon: ({ focused }) =>

@@ -14,7 +14,7 @@ export default class ListScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedProvinceForShow: '',
+            selectedProvinceForShow: 'all',
             seeAll: this.props.navigation.state.params.isSeeAll ? true : false,
             type  : this.props.navigation.state.params.type,
         };
@@ -34,6 +34,8 @@ export default class ListScreen extends Component {
         this.setState({
             selectedProvinceForShow: forShow,
             selectedPrvinceName: name
+        },() => {
+            this.props.restaurant.searchByLocation(name,this.state.type)
         })
     }
 
@@ -49,6 +51,7 @@ export default class ListScreen extends Component {
                 {!this.state.seeAll &&
                     <View>
                         <SearchBox
+                            onSearchPressed = {(value) => this.props.restaurant.onSearch(value,this.state.selectedProvinceForShow.toLocaleLowerCase(),this.state.type) }
                             placeholder={'Search here...'}
                         />
                         <TouchableOpacity
@@ -68,6 +71,8 @@ export default class ListScreen extends Component {
                     renderItem={({ item }) =>
                         <Card
                             cardPressed={() => this.props.navigation.navigate('ViewDetail', {
+                                id:item.id,
+                                description: item.description,
                                 illustration: item.coverUrl,
                                 tittle: item.businessName,
                                 backgroundColor: this.props.navigation.state.params.backgroundColor,
