@@ -42,12 +42,14 @@ export default class AddReview extends Component {
   onSubmitButtom = () => {
     const { signupUser, signInUser } = this.props.user
     if (this.state.titleLabel == "Login") {
+      console.log('Login')
       firebase
         .auth()
         .signInWithEmailAndPassword(this.state.email, this.state.password)
         .then(() => alert("Success"))
         .catch(error => alert(error))
     } else {
+      console.log('Register')
       if (this.state.password == this.state.retrypassword) {
         firebase
           .auth()
@@ -125,7 +127,7 @@ export default class AddReview extends Component {
                 autoCapitalize="none"
                 placeholder="Enter your Gmail"
                 style={styles.textInputStyle}
-                onChangeText={(text) => this.setState({ gmail: text })}
+                onChangeText={(text) => this.setState({ email: text })}
                 />
               <TextInput
                 secureTextEntry={true}
