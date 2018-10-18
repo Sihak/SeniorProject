@@ -30,6 +30,7 @@ class AddPostScreen extends Component {
             businessType: null,
             description: null,
             mapLocation: null,
+            contact : null,
         }
     }
 
@@ -106,8 +107,8 @@ class AddPostScreen extends Component {
 
     onConfirm() {
         if(this.validation){
-            const { businessType, logo, cover, location, description, mapLocation, businessName } = this.state;
-            this.props.restaurant.addRestaurant(businessName,location,businessType,logo,cover,description,mapLocation);
+            const { businessType, logo, cover, location, description, mapLocation, businessName, contact } = this.state;
+            this.props.restaurant.addRestaurant(businessName,location,businessType,logo,cover,description,mapLocation, contact);
         }
         else{
             Alert.alert('Please enter your information properly.')
@@ -153,6 +154,16 @@ class AddPostScreen extends Component {
                                 autoCorrect={false}
                                 autoCapitalize={'none'}
                                 placeholder={'Your business name'}
+                            />
+                        </View>
+                        <View style={styles.textInput}>
+                            <Text style={styles.label}>Contact</Text>
+                            <TextInput
+                                style={[styles.textBox]}
+                                onChangeText={(value) => this.setState({ contact: value })}
+                                autoCorrect={false}
+                                autoCapitalize={'none'}
+                                placeholder={'Your contact number'}
                             />
                         </View>
                         <TouchableOpacity

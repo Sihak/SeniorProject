@@ -4,12 +4,23 @@ import { restaurantDB } from '../services/base';
 import { getImageUrl, pushToArray } from '../../utilities';
 // import moment from ''
 export default class Restaurant  {
+
+    constructor(){
+        this.getDrinks();
+        this.getFoods();
+        this.getStreetFoods();
+    }
+
     @observable stores = [];
     @observable loading = false;
-    @action addRestaurant(businessName,location,type,logo,cover,description,mapLocation){
+    @observable drinks = [];
+    @observable foods = [];
+    @observable streetFoods = [];
+    @action addRestaurant(businessName,location,type,logo,cover,description,mapLocation,contact){
         const restaurant = {
             dateCreated : new Date(),
             businessName: businessName,
+            contact : contact,
             location    : location,
             type        : type,
             logoUrl     : logo,
@@ -25,11 +36,42 @@ export default class Restaurant  {
         });
     }
 
+    @action getDrinks(){
+        this.loading = true;
+        restaurantDB()
+        .where('type','==','drinks')
+        .onSnapshot(stores => {
+            this.drinks = pushToArray(stores);
+            this.loading = false;
+        })
+    }
+
+    @action getFoods(){
+        this.loading = true;
+        restaurantDB()
+        .where('type','==','foods')
+        .onSnapshot(stores => {
+            this.foods = pushToArray(stores);
+            this.loading = false;
+        })
+    }
+
+    @action getStreetFoods(){
+        this.loading = true;
+        restaurantDB()
+        .where('type','==','streetFoods')
+        .onSnapshot(stores => {
+            this.streetFoods = pushToArray(stores);
+            this.loading = false;
+        })
+    }
+
     @action getRestaurant(type){
+        console.log('TYPE',type)
         if(type){
             this.loading = true;
             restaurantDB()
-            .where('type','===',type)
+            .where('type','==',type)
             .onSnapshot(stores => {
                 this.stores = pushToArray(stores);
                 this.loading = false;
