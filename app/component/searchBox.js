@@ -32,19 +32,20 @@ class SearchBox extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchFood: [],
-            searchDrink: [],
-            searchStreetFood: [],
+            // searchFood: [],
+            // searchDrink: [],
+            // searchStreetFood: [],
+            value: null,
         }
     }
-    searchFilter(value){
-        const data = ENTRIES2;
-        const dataFiltered = data.filter(
-            ENTRIES2 =>
-        ENTRIES2.title.toLowerCase().indexOf(value.toLowerCase()) !== -1
-        )
-        console.log(dataFiltered);
-    }
+    // searchFilter(value){
+    //     const data = ENTRIES2;
+    //     const dataFiltered = data.filter(
+    //         ENTRIES2 =>
+    //     ENTRIES2.title.toLowerCase().indexOf(value.toLowerCase()) !== -1
+    //     )
+    //     console.log(dataFiltered);
+    // }
 
     render() {
         return (
@@ -53,10 +54,10 @@ class SearchBox extends Component {
                     style={[styles.searchInput, APPEARANCES.SHADOW]}
                     placeholder={this.props.placeholder}
                     placeholderTextColor={'rgba(0,0,0,.5)'}
-                    onChangeText={(value) => this.searchFilter(value)}
+                    onChangeText={(text) => this.setState({value:text})}
                 />
                 <TouchableOpacity
-                    onPress={() => this.props.onSearchPressed}
+                    onPress={() => this.props.onSearchPressed(this.state.value)}
                 >
                     <FontAwesome style={[APPEARANCES.SHADOW, { fontSize: DIMENSION(7), marginLeft: DIMENSION(3), color: '#333', fontWeight: '300' }, APPEARANCES.SHADOW]} name='search' />
                 </TouchableOpacity>

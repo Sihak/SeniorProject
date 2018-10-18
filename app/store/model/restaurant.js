@@ -16,12 +16,12 @@ export default class Restaurant  {
     @observable drinks = [];
     @observable foods = [];
     @observable streetFoods = [];
-    @action addRestaurant(businessName,location,type,logo,cover,description,mapLocation,contact){
+    @action addRestaurant(businessName,location,type,logo,cover,description,mapLocation,contact,callback){
         const restaurant = {
             dateCreated : new Date(),
             businessName: businessName,
             contact : contact,
-            location    : location,
+            location    : location.toLowerCase(),
             type        : type,
             logoUrl     : logo,
             coverUrl    : cover,
@@ -33,6 +33,10 @@ export default class Restaurant  {
         this.loading = true;
         insertRestaurant(restaurant).then(() => {
             this.loading = false;
+            callback(true,null)
+        }).catch(error => {
+            this.loading = false;
+            callback(false,error)
         });
     }
 
@@ -84,6 +88,65 @@ export default class Restaurant  {
                 this.loading = false;
             })
         };
-       
+    };
+    @action searchByLocation(location,type){
+        console.log('TYPE',location)
+        if(location){
+            this.loading = true;
+            restaurantDB()
+            .where('type', '==',type)
+            .where('location','==',location)
+            .onSnapshot(stores => {
+                this.stores = pushToArray(stores);
+                this.loading = false;
+            })
+        }else if(location == 'all') {
+            this.loading = true;
+            restaurantDB()
+            .where('type', '==',type)
+            .onSnapshot(stores => {
+                this.stores = pushToArray(stores);
+                this.loading = false;
+            })
+        }
+        else {
+            this.loading = true;
+            restaurantDB()
+            .where('type', '==',type)
+            .onSnapshot(stores => {
+                this.stores = pushToArray(stores);
+                this.loading = false;
+            })
+        };
+    };
+
+    @action onSearch(businessName,location,type){
+        console.log('TYPE',type)
+        console.log('locarion',location)
+        console.log('businessName',businessName)
+
+        if(businessName && location){
+            this.loading = true;
+            restaurantDB()
+            .where('businessName','==',businessName)
+            .where('type', '==',type)
+            .where('location','==',location)
+            .onSnapshot(stores => {
+                this.stores = pushToArray(stores);
+                this.loading = false;
+            })
+        }
+        else if(businessName && location == 'all'){
+            restaurantDB()
+            .where('businessName','==',businessName)
+            .where('type', '==',type)
+            .onSnapshot(stores => {
+                this.stores = pushToArray(stores);
+                this.loading = false;
+            })
+        }
+        else {
+           return;
+        };
     };
 }
