@@ -30,7 +30,7 @@ class AddPostScreen extends Component {
             businessType: null,
             description: null,
             mapLocation: null,
-            contact : null,
+            contact: null,
         }
     }
 
@@ -95,22 +95,30 @@ class AddPostScreen extends Component {
         })
     }
 
-    validation(){
+    validation() {
         const { businessType, logo, cover, location, description, mapLocation, businessName } = this.state;
-        if(businessType || logo || description || mapLocation || businessName){
+        if (businessType || description || mapLocation || businessName) {
             return true;
         }
-        else{
+        else {
             return false;
         }
     }
 
     onConfirm() {
-        if(this.validation){
+        if (this.validation()) {
             const { businessType, logo, cover, location, description, mapLocation, businessName, contact } = this.state;
-            this.props.restaurant.addRestaurant(businessName,location,businessType,logo,cover,description,mapLocation, contact);
+            this.props.restaurant.addRestaurant(businessName, location, businessType, logo, cover, description, mapLocation, contact, (success,response) => {
+                console.log(success)
+                if (success) {
+                    this.props.navigation.goBack();
+                }
+                else {
+                    Alert.alert('Register fail!!!')
+                }
+            });
         }
-        else{
+        else {
             Alert.alert('Please enter your information properly.')
         }
     }
@@ -132,7 +140,7 @@ class AddPostScreen extends Component {
         const { businessType, logo, cover, location, description, mapLocation, businessName } = this.state;
         return (
             <View style={{ flex: 1 }}>
-              {loading ?
+                {loading ?
                     <Loading />
                     : <View></View>
 

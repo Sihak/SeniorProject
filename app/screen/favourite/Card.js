@@ -17,7 +17,8 @@ class Card extends Component {
             <TouchableOpacity
                 onPress={() => this.onCardPressed()}
                 style={[cards.card, APPEARANCES.SHADOW]} >
-                       <View style={cards.cardCover}>
+              
+                <View style={cards.cardCover}>
                     <Image
                         resizeMethod = {'resize'}
                         resizeMode = {'cover'}
@@ -45,7 +46,6 @@ class Card extends Component {
                         </Text>
                     </View> */}
                 </View>
-         
             </TouchableOpacity>
         );
     }
