@@ -19,7 +19,7 @@ export default class AddReview extends Component {
       display: false,
       login: false,
       titleLabel: 'Login',
-      gmail: '',
+      email: '',
       password: '',
       retrypassword: '',
       message: '',
@@ -28,34 +28,52 @@ export default class AddReview extends Component {
   }
   componentDidMount() {
     // this.setState({gmail: this.props.user.getCurrentUser()})
-    this.setState({currentUser: firebase.auth.currentUser})
-    alert(this.state.currentUser)
+    const { currentUser } = firebase.auth()
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.state.login = false
+        this.setState({ currentUser: currentUser.email })
+      } else {
+        this.state.login = true
+      }
+    })
   }
   triggerModal() {
-    this.setState(prevState => {
-      return {
-        display: true
-      }
-    });
+
+    this.state.titleLabel = "Login"
+    if (this.state.login == true) {
+      this.setState(prevState => {
+        return {
+          display: true
+        }
+      });
+    } else {
+      alert(this.state.currentUser)
+    }
+
   }
 
   onSubmitButtom = () => {
     const { signupUser, signInUser } = this.props.user
     if (this.state.titleLabel == "Login") {
-      console.log('Login')
-      firebase
+       firebase
         .auth()
         .signInWithEmailAndPassword(this.state.email, this.state.password)
-        .then(() => alert("Success"))
-        .catch(error => alert(error))
+        .then(() =>
+          alert("Success")
+        ).catch(error => alert(error))
+        this.setState({ display: false })
+
     } else {
       console.log('Register')
       if (this.state.password == this.state.retrypassword) {
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.state.email, this.state.password)
-          .then(() => alert("Success"))
-          .catch(error => alert(error))
+          .then(() =>
+            alert("Success")
+          ).catch(error => alert(error))
+          this.setState({ display: false })
       } else {
         this.setState({ message: "Password Not Match" })
       }
@@ -125,7 +143,7 @@ export default class AddReview extends Component {
             <View style={{ margin: 30 }}>
               <TextInput
                 autoCapitalize="none"
-                placeholder="Enter your Gmail"
+                placeholder="Enter your Email"
                 style={styles.textInputStyle}
                 onChangeText={(text) => this.setState({ email: text })}
                 />
