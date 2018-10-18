@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity, FlatList
 import { COLORS, DIMENSION, APPEARANCES } from '../../module';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import TabHeader from '../../component/tabHeader';
-
+import firebase from 'react-native-firebase'
 
 class MeScreen extends Component {
 
@@ -13,12 +13,20 @@ class MeScreen extends Component {
             <View style={{ height: DIMENSION(5) }} ></View>
         )
     }
+    signOutUser = async () => {
+        try {
+            await firebase.auth().signOut();
+            alert(firebase.auth().currentUser.email)
 
+        } catch (e) {
+            alert(e)
+        }
+    }
     render() {
         return (
             <View style={{ flex: 1 }}>
                 <TabHeader 
-                   iconPressed={() => this.props.navigation.navigate('notification')}
+                   iconPressed={() => this.signOutUser()}
                    icon={'notifications'}
                    headerTittle={'Me'}
                 />
