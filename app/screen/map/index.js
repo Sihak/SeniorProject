@@ -4,7 +4,7 @@ import {  Animated, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Text
 import MapComponent from '../../component/mapComponent'
 import { DIMENSION, APPEARANCES, COLORS } from '../../module';
 import SearchBox from '../../component/searchBox';
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { View } from 'react-native-animatable';
 
 class MapScreen extends Component {
@@ -19,6 +19,7 @@ class MapScreen extends Component {
     }
     
     render() {
+        const activeColor = COLORS.POSITIVE_COLOR;
         return (
             <View style={styles.container}>
                 <MapComponent
@@ -46,8 +47,11 @@ class MapScreen extends Component {
                 </View>
                 <TouchableOpacity
                     onPress={() => this.setState({ isListingRestaurant: !this.state.isListingRestaurant })}
-                    style={styles.bottomCloes}>
-                    <MaterialIcons style={styles.icon} name={'close'} />
+                    style={[styles.bottomCloes, this.state.isListingRestaurant === true? {top: DIMENSION(100)}:{top: DIMENSION(150)}]}>
+                    <FontAwesome style={[styles.icon, this.state.isListingRestaurant === true ?{color: 'rgba(0,0,0,0.3)'}:{color:activeColor}]} 
+                    name={this.state.isListingRestaurant === true ? 'arrow-circle-o-down':"arrow-circle-o-up"}  
+                    
+                    />
                 </TouchableOpacity>
 
             </View>
@@ -68,8 +72,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     icon: {
-        color: COLORS.TEXT_BLACK,
-        fontSize: 20,
+        
+        fontSize: 25,
+        marginBottom: -5,
     },
     container: {
 
@@ -90,7 +95,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         right: 10,
-        top: DIMENSION(90)
+        
     }
 });
 
