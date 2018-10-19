@@ -22,6 +22,7 @@ export default class User {
                 return callback(true, account)
             })
     };
+    
     @action signupUser(email, password, callback) {
         auth().createUserWithEmailAndPassword(email,password)
             .catch(error => {
