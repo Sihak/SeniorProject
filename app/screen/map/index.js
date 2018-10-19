@@ -1,12 +1,18 @@
 //import liraries
 import React, { Component } from 'react';
-import {  Animated, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Text } from 'react-native';
+import { Animated, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Text } from 'react-native';
 import MapComponent from '../../component/mapComponent'
 import { DIMENSION, APPEARANCES, COLORS } from '../../module';
 import SearchBox from '../../component/searchBox';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { View } from 'react-native-animatable';
+import Loading from '../../component/loading';
+import { observer, inject } from 'mobx-react';
 
+
+
+@inject('restaurant')
+@observer
 class MapScreen extends Component {
     constructor(props) {
         super(props);
@@ -17,15 +23,36 @@ class MapScreen extends Component {
             searchStreetFood: [],
         }
     }
-    
+    componentDidMount() {
+        this.props.restaurant.getRestaurant()
+    }
+    // componentWillMount() {
+    //     this.props.restaurant.getRestaurant()
+    // }
     render() {
+        const { loading, stores } = this.props.restaurant
+        // console.log("data:", this.props.dataSearch )
         const activeColor = COLORS.POSITIVE_COLOR;
         return (
             <View style={styles.container}>
-                <MapComponent
-                    listRestaurant={this.state.isListingRestaurant}
-                    image={require('../../asset/images/map.png')}
-                />
+                {loading ?
+                    <Loading />
+                    : <View></View>
+
+                }
+                {this.props.restaurant.stores.length > 0 ?
+                    <MapComponent
+                        navigation={this.props.navigation}
+                        listRestaurant={this.state.isListingRestaurant === true}
+                        image={require('../../asset/images/map.png')}
+                        // itemPressed={() => this.props.navigation.navigate('ViewDetail', {
+                        //     backgroundColor: COLORS.LIGHT_BLUE,
+                        //   })}
+                    />
+                    : null
+
+                }
+
 
                 {/* <TouchableWithoutFeedback
                     style={{ backgroundColor: 'red', width: 200, height: 200, position: 'absolute' }}
@@ -39,10 +66,9 @@ class MapScreen extends Component {
                     </View>
                 </TouchableWithoutFeedback> */}
                 <View style={styles.searchBottom}>
-
                     <SearchBox
                         placeholder={'search'}
-                        // dataSearch={this.props.dataMap}
+                    // dataSearch={this.props.restaurant.stores}
                     />
                 </View>
                 <TouchableOpacity
@@ -72,7 +98,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     icon: {
-        
+
         fontSize: 25,
         marginBottom: -5,
     },
@@ -80,13 +106,13 @@ const styles = StyleSheet.create({
 
     },
 
-    searchBottom: {
-        position: 'absolute',
-        top: DIMENSION(11),
+    // searchBottom: {
+    //     position: 'absolute',
+    //     top: DIMENSION(11),
 
-        left: DIMENSION(5),
-        // backgroundColor:'red'
-    },
+    //     left: DIMENSION(5),
+    //     // backgroundColor:'red'
+    // },
 
     bottomCloes: {
         position: 'absolute',
@@ -95,7 +121,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         right: 10,
-        
+
     }
 });
 

@@ -8,12 +8,14 @@ import {
 	TouchableOpacity,
 	Image
 } from "react-native";
-import isIphoneX from '../../../../module/platform';
-import { translate } from "react-i18next";
+// import isIphoneX from '../../../../module/platform';
+// import { translate } from "react-i18next";
 import Carousel from "react-native-snap-carousel";
 import { DIMENSION, COLORS, APPEARANCES } from '../../../../module';
 import Entypo from "react-native-vector-icons/Entypo";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+
 
 
 
@@ -46,26 +48,75 @@ class SliderCarousel extends Component {
 	// 	CustomTabs.openURL(link);
 	// 	// Linking.openURL("url:" + url);
 	//   }
+
+	componentDidMount() {
+		this.props.onChange(this.sliderData[0].mapLocation.latitude, this.sliderData[0].mapLocation.longitude)
+		// this.sliderData[14].mapLocation.latitude
+		// this.sliderData[14].mapLocation.longitude
+
+
+	}
+	_onDetail = (item) => {
+        this.props.navigation.navigate({
+            routeName: "ViewDetails",
+            key: "ViewDetails",
+            params: {
+                 item
+            }
+		});
+		
+		// console.log("work")
+    }
+
 	_renderItem({ item, index }) {
 		this.state
 		return (
-			<TouchableWithoutFeedback style={[styles.card, APPEARANCES.SHADOW]}>
+			<TouchableOpacity
+				onPress={() => this._onDetail(item)}
+				style={[styles.card, APPEARANCES.SHADOW]}>
 				<View style={styles.coverContainer}>
-					<Image source={{
-						uri: item.media.file_url
-					}} style={{ height: height, width: width }} />
+					<Image
+						style={{ height: height, width: width }} source={{ uri: item.coverUrl }} />
 				</View>
-			</TouchableWithoutFeedback>
+				<View style={styles.details}>
+					<Text style={styles.companyName}>{item.businessName}</Text>
+					<Text style={styles.description}>
+						Wanna try our new tastes ?
+                    </Text>
+					<View style={styles.contact}>
+						<MaterialIcons style={styles.icon} name={'place'} />
+						<Text style={styles.contactText}>
+							{item.location}
+						</Text>
+					</View>
+					<View style={styles.contact}>
+						<MaterialIcons style={styles.icon} name={'call'} />
+						<Text style={styles.contactText}>
+							{item.contact}
+						</Text>
+					</View>
+				</View>
+			</TouchableOpacity>
+			// <TouchableWithoutFeedback 
+			// onPress={() =>  this.navigation.navigate('NewFeed')}
+			// style={[styles.card, APPEARANCES.SHADOW]}>
+			// 	<View style={styles.coverContainer}>
+			// 		<Image source={{
+			// 			uri:item.coverUrl
+			// 		}} style={{ height: height, width: width }} />
+			// 	</View>
+			// </TouchableWithoutFeedback>
 		);
 	}
 
 	changeIndex = (currentIndex) => {
 		this.setState({ item: this.sliderData[currentIndex] })
+		console.log("this.sliderData[currentIndex]:", this.sliderData[currentIndex])
+		this.props.onChange(this.sliderData[currentIndex].mapLocation.latitude, this.sliderData[currentIndex].mapLocation.longitude)
 	}
 
 	render() {
-		console.log("this.state.item.facebook_url:", this.state.item);
-		const { language } = this.props.i18n;
+		console.log("props2222", this.props)
 		return (
 			<View style={styles.cContainer}>
 				{/* <Text style={styles.titleText}>
@@ -86,9 +137,10 @@ class SliderCarousel extends Component {
 						autoplayDelay={500}
 						autoplayInterval={3000}
 						loop={true}
+						removeClippedSubviews={false}
 						onSnapToItem={this.changeIndex}
 					/>
-					<View style={{ flex: 1, marginLeft: DIMENSION(5), marginLeft: DIMENSION(5), }}>
+					{/* <View style={{ flex: 1, marginLeft: DIMENSION(5), marginLeft: DIMENSION(5), }}>
 						{
 							this.state.item ?
 								<View style={styles.titileBankName}>
@@ -101,10 +153,10 @@ class SliderCarousel extends Component {
 						{
 							this.state.item ?
 								<View style={styles.bankDescription}>
-									{/* <Image
+									<Image
 										source={require('../../../../asset/Icons/Home/Location.png')}
 										style={styles.imageAddressBank}
-									/> */}
+									/>
 									<Text style={styles.sentenceAddressBank}>
 										{language == "kh" ? this.state.item.description_kh : this.state.item.description_en}
 									</Text>
@@ -115,7 +167,7 @@ class SliderCarousel extends Component {
 							this.state.item ?
 								<View style={styles.bankAddress}>
 									<Image
-										source={require('../../../../asset/Icons/Home/Location.png')}
+										source={require('../../../../asset/images/map.png')}
 										style={styles.imageAddressBank}
 									/>
 									<View style={{ width: DIMENSION(77) }}>
@@ -245,7 +297,7 @@ class SliderCarousel extends Component {
 
 
 						</View>
-					</View>
+					</View> */}
 				</View>
 			</View>
 		);
@@ -253,7 +305,7 @@ class SliderCarousel extends Component {
 }
 
 
-export default (translate("common")(SliderCarousel));
+export default SliderCarousel;
 
 const styles = {
 	buttomMenu: {
@@ -276,7 +328,7 @@ const styles = {
 		marginBottom: DIMENSION(0),
 	},
 	card: {
-		marginVertical: 5,
+		// marginVertical: 5,
 		width: DIMENSION(70),
 		height: DIMENSION(80),
 		borderRadius: 12,
@@ -404,6 +456,80 @@ const styles = {
 		borderWidth: 2,
 		borderColor: "white"
 	},
+	// cartCarousl
+	list: {
+        paddingVertical: 5,
+    },
+    scrollableMenu: {
+        marginTop: 10,
+    },
+    card: {
+        marginVertical: 5,
+        width: DIMENSION(70),
+        height: DIMENSION(70),
+        borderRadius: 12,
+        overflow: 'hidden',
+        marginHorizontal: 10,
+        backgroundColor: '#fff',
+    },
+    cover: {
+        width: '100%',
+        height: '100%'
+    },
+    coverContainer: {
+        width: '100%',
+        height: '60%',
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingVertical: 15,
+        paddingHorizontal: 10,
+    },
+
+    details: {
+		padding: 6.5,
+		marginTop: 7,
+    },
+
+    description: {
+        marginTop: 5,
+        color: COLORS.TEXT_BLACK,
+        fontSize: 12,
+        fontWeight: '600'
+    },
+
+    icon: {
+        color: COLORS.TEXT_BLACK,
+    },
+
+    contactText: {
+        color: COLORS.TEXT_BLACK,
+        marginLeft: 5,
+    },
+
+    contact: {
+        marginTop: 2.5,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+
+    companyName: {
+        fontSize: 18,
+        fontWeight: '900',
+        color: COLORS.TEXT_BLACK
+    },
+
+    seeAll: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: COLORS.POSITIVE_COLOR
+    },
+    scrollableMenuName: {
+        fontSize: 23,
+        fontWeight: 'bold',
+        color: COLORS.TEXT_BLACK
+    },
 	iconStyle: { fontSize: 50, color: "white", marginLeft: 8 },
 	cContainer: { paddingBottom: 32, },
 	titleText: { paddingLeft: 16, paddingTop: 8, paddingBottom: 8 }
