@@ -51,7 +51,11 @@ export default class NewFeed extends Component {
           <ScrollableMenu
             data = {drinks}
             seeAllPressed={() => this.navigate('List', 'Drinks', COLORS.ORANGE_YELLOW, true)}
-            itemPressed={() => this.props.navigation.navigate('ViewDetail', {
+            itemPressed={(item) => this.props.navigation.navigate('ViewDetail', {
+              id:item.id,
+              description: item.description,
+              illustration: item.coverUrl,
+              tittle: item.businessName,
               backgroundColor: COLORS.ORANGE_YELLOW,
             })}
             tittle={'Drink'}
@@ -59,7 +63,11 @@ export default class NewFeed extends Component {
           <ScrollableMenu
             data = {foods}
             seeAllPressed={() => this.navigate('List', 'Food', COLORS.LIGHT_BLUE, true)}
-            itemPressed={() => this.props.navigation.navigate('ViewDetail', {
+            itemPressed={(item) => this.props.navigation.navigate('ViewDetail', {
+              id:item.id,
+              description: item.description,
+              illustration: item.coverUrl,
+              tittle: item.businessName,
               backgroundColor: COLORS.LIGHT_BLUE,
             })}
             tittle={'Food'}
@@ -67,7 +75,11 @@ export default class NewFeed extends Component {
           <ScrollableMenu
             data = {streetFoods}
             seeAllPressed={() => this.navigate('List', 'Street Food', COLORS.DARK_GREEN, true)}
-            itemPressed={() => this.props.navigation.navigate('ViewDetail', {
+            itemPressed={(item) => this.props.navigation.navigate('ViewDetail', {
+              id:item.id,
+              description: item.description,
+              illustration: item.coverUrl,
+              tittle: item.businessName,
               backgroundColor: COLORS.DARK_GREEN,
             })}
             tittle={'Street Food'}

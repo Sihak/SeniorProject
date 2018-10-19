@@ -95,7 +95,7 @@ export default class Restaurant  {
             this.loading = true;
             restaurantDB()
             .where('type', '==',type)
-            .where('location','==',location)
+            .where('location','==',location.toLowerCase())
             .onSnapshot(stores => {
                 this.stores = pushToArray(stores);
                 this.loading = false;

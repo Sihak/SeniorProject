@@ -30,7 +30,7 @@ export default class ScrollableMenu extends Component {
                     renderItem={({ item }) => {
                         return (
                             <TouchableOpacity 
-                            onPress = {this.props.itemPressed}
+                            onPress = {() => this.props.itemPressed(item)}
                             style={[styles.card, APPEARANCES.SHADOW]}>
                                 <View style={styles.coverContainer}>
                                     <Image
@@ -44,7 +44,7 @@ export default class ScrollableMenu extends Component {
                                     <View style={styles.contact}>
                                         <MaterialIcons style={styles.icon} name={'place'} />
                                         <Text style={styles.contactText}>
-                                            {item.location}
+                                            {item.location.toUpperCase()}
                                     </Text>
                                     </View>
                                     <View style={styles.contact}>
