@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, TextInput, Image, TouchableOpacity, FlatList } from 'react-native';
 import { COLORS, DIMENSION, APPEARANCES } from '../../module';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import TabHeader from '../../component/tabHeader';
@@ -13,11 +13,21 @@ class MeScreen extends Component {
             <View style={{ height: DIMENSION(5) }} ></View>
         )
     }
+    componentWillMount() {
+        const { currentUser } = firebase.auth()
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                
+            } else {
+                this.props.navigation.navigate("CheckLoginScreen")
+            }
+        })
+    }
+
     signOutUser = async () => {
         try {
             await firebase.auth().signOut();
-            alert(firebase.auth().currentUser.email)
-
+            this.props.navigation.navigate("CheckLoginScreen")
         } catch (e) {
             alert(e)
         }
@@ -25,10 +35,10 @@ class MeScreen extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <TabHeader 
-                   iconPressed={() => this.signOutUser()}
-                   icon={'notifications'}
-                   headerTittle={'Me'}
+                <TabHeader
+                    iconPressed={() => this.signOutUser()}
+                    icon={'notifications'}
+                    headerTittle={'Me'}
                 />
                 <View
                     style={styles.container}>
@@ -36,7 +46,7 @@ class MeScreen extends Component {
                         ItemSeparatorComponent={() => this.itemSeperator()}
                         ListHeaderComponent={() => {
                             return (
-                                <View style = {{marginVertical:DIMENSION(5)}}>
+                                <View style={{ marginVertical: DIMENSION(5) }}>
                                     <View style={styles.userProfile}>
                                         <Image style={styles.imgProfile} source={require('../../asset/images/user.png')} />
                                         <View style={styles.userInfo}>
@@ -58,13 +68,13 @@ class MeScreen extends Component {
                             return (
                                 <TouchableOpacity
                                     onPress={() => this.props.navigation.navigate('EditPost')}
-                                    style={[styles.post, APPEARANCES.SHADOW,{borderRightColor:'#E32557',borderRightWidth:5,borderLeftWidth:5,borderLeftColor:'#5EB6EE'}]}>
+                                    style={[styles.post, APPEARANCES.SHADOW, { borderRightColor: '#E32557', borderRightWidth: 5, borderLeftWidth: 5, borderLeftColor: '#5EB6EE' }]}>
                                     <View style={styles.logoContainer} >
                                         <Image style={styles.logo} source={require('../../asset/images/store.png')} />
                                     </View>
-                                    <View style = {styles.postDetails}>
-                                            <Text style = {styles.shopName}>T-Shop</Text>
-                                            <Text style = {styles.shopType}>Street Food</Text>
+                                    <View style={styles.postDetails}>
+                                        <Text style={styles.shopName}>T-Shop</Text>
+                                        <Text style={styles.shopType}>Street Food</Text>
                                     </View>
                                 </TouchableOpacity>
                             )
@@ -80,30 +90,29 @@ class MeScreen extends Component {
 const userIMG = DIMENSION(42)
 const logo = DIMENSION(20)
 const styles = StyleSheet.create({
-
-    postDetails:{
-        flex:1,
+    postDetails: {
+        flex: 1,
         marginLeft: 15,
-        borderLeftWidth:2,
-        paddingVertical:35,
-        borderColor:'rgba(0,0,0,0.2)',
+        borderLeftWidth: 2,
+        paddingVertical: 35,
+        borderColor: 'rgba(0,0,0,0.2)',
         paddingHorizontal: 15,
         justifyContent: 'center',
         alignItems: 'center',
 
     },
 
-    shopName:{
-        fontSize:22,
-        fontWeight:'900',
+    shopName: {
+        fontSize: 22,
+        fontWeight: '900',
         marginBottom: 5,
-        color:'#333'
+        color: '#333'
     },
 
-    shopType:{
-        fontSize:18,
-        fontWeight:'300',
-        color:'rgba(0,0,0,.5)',
+    shopType: {
+        fontSize: 18,
+        fontWeight: '300',
+        color: 'rgba(0,0,0,.5)',
     },
 
     logoContainer: {
@@ -129,7 +138,7 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         justifyContent: 'center',
         alignItems: 'center',
-        padding:15
+        padding: 15
     },
     addIcon: {
         fontSize: 65,
@@ -163,7 +172,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor:COLORS.MAIN_BACKGROUND_COLOR
+        backgroundColor: COLORS.MAIN_BACKGROUND_COLOR
     },
 
     body: {
