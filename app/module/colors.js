@@ -9,6 +9,10 @@ COLORS = {
     ORANGE_YELLOW: '#FFC86B',
     LIGHT_BLUE: '#00A4E0',
     DARK_GREEN:'#0098A3',
+    RED: '#F25958',
+    GREEN : '#17BEA6',
+    SKY: '#0EDCF3',
+
 }
 
 module.exports = COLORS;

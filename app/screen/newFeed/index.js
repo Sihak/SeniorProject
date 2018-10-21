@@ -19,14 +19,14 @@ export default class NewFeed extends Component {
   }
 
   render() {
-    const { drinks, foods, streetFoods,loading } = this.props.restaurant;
+    const { drinks, foods, streetFoods, loading } = this.props.restaurant;
     return (
       <View style={{ flex: 1 }}>
         <TabHeader
           iconPressed={() => this.props.navigation.navigate('notification')}
           headerTittle={'New Feed'}
         />
-        
+
         <ScrollView style={{ flex: 1, backgroundColor: COLORS.MAIN_BACKGROUND_COLOR }}>
           <View style={styles.featureButtonContainer}>
             <TouchableOpacity
@@ -39,7 +39,7 @@ export default class NewFeed extends Component {
               onPress={() => this.navigate('List', 'foods', COLORS.LIGHT_BLUE, false)}
               style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.LIGHT_BLUE }]}>
               <Image source={require('../../asset/images/food.png')} style={styles.featureIcon} />
-              <Text style={styles.label} >Food</Text>
+              <Text style={styles.label} >Restaurant</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => this.navigate('List', 'Street Food', COLORS.DARK_GREEN, false)}
@@ -48,11 +48,31 @@ export default class NewFeed extends Component {
               <Text style={styles.label}>Street Food</Text>
             </TouchableOpacity>
           </View>
+          <View style={styles.featureButtonContainer}>
+            <TouchableOpacity
+              onPress={() => this.navigate('List', 'drinks', COLORS.RED, false)}
+              style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.RED }]}>
+              <Image source={require('../../asset/images/trn.png')} style={styles.featureIcon} />
+              <Text style={styles.label} >Transportaion</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.navigate('List', 'foods', COLORS.LIGHT_BLUE, false)}
+              style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.GREEN }]}>
+              <Image source={require('../../asset/images/acm.png')} style={styles.featureIcon} />
+              <Text style={styles.label} >Accomodation</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.navigate('List', 'Street Food', COLORS.SKY, false)}
+              style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.SKY }]}>
+              <Image source={require('../../asset/images/service.png')} style={styles.featureIcon} />
+              <Text style={styles.label}>Services</Text>
+            </TouchableOpacity>
+          </View>
           <ScrollableMenu
-            data = {drinks}
+            data={drinks}
             seeAllPressed={() => this.navigate('List', 'Drinks', COLORS.ORANGE_YELLOW, true)}
             itemPressed={(item) => this.props.navigation.navigate('ViewDetail', {
-              id:item.id,
+              id: item.id,
               description: item.description,
               illustration: item.coverUrl,
               tittle: item.businessName,
@@ -61,22 +81,22 @@ export default class NewFeed extends Component {
             tittle={'Drink'}
           />
           <ScrollableMenu
-            data = {foods}
+            data={foods}
             seeAllPressed={() => this.navigate('List', 'Food', COLORS.LIGHT_BLUE, true)}
             itemPressed={(item) => this.props.navigation.navigate('ViewDetail', {
-              id:item.id,
+              id: item.id,
               description: item.description,
               illustration: item.coverUrl,
               tittle: item.businessName,
               backgroundColor: COLORS.LIGHT_BLUE,
             })}
-            tittle={'Food'}
+            tittle={'Restaurant'}
           />
           <ScrollableMenu
-            data = {streetFoods}
+            data={streetFoods}
             seeAllPressed={() => this.navigate('List', 'Street Food', COLORS.DARK_GREEN, true)}
             itemPressed={(item) => this.props.navigation.navigate('ViewDetail', {
-              id:item.id,
+              id: item.id,
               description: item.description,
               illustration: item.coverUrl,
               tittle: item.businessName,
@@ -115,7 +135,7 @@ const styles = {
   },
   label: {
     textAlign: 'center',
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '900',
     color: COLORS.TEXT_BLACK
   }

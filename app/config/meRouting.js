@@ -4,16 +4,12 @@ import AddPostScreen from '../screen/me/addPost';
 import SelectPlaceScreen from '../screen/me/FilterScreen';
 import AddDescription from '../screen/me/addDescription';
 import EditPostScreen from '../screen/me/editPost';
-import CheckLoginScreen from '../screen/me/checkLoginScreen';
 
 const MeRouting = createStackNavigator({
   Me:{
       screen:MeScreen
   },
 
-  CheckLoginScreen: {
-    screen: CheckLoginScreen
-  },
   AddPost:{
       screen: AddPostScreen
   },

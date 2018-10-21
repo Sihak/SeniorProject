@@ -38,19 +38,16 @@ export default class ScrollableMenu extends Component {
                                 </View>
                                 <View style={styles.details}>
                                     <Text style={styles.companyName}>{item.businessName}</Text>
-                                    <Text style={styles.description}>
-                                        Wanna try our new tastes ?
-                                </Text>
+                                <View style={styles.contact}>
+                                        <MaterialIcons style={styles.icon} name={'store'} />
+                                        <Text style={[styles.contactText, {fontWeight:'900'}]}>
+                                            {'Koi The'}
+                                    </Text>
+                                    </View>
                                     <View style={styles.contact}>
                                         <MaterialIcons style={styles.icon} name={'place'} />
                                         <Text style={styles.contactText}>
                                             {item.location.toUpperCase()}
-                                    </Text>
-                                    </View>
-                                    <View style={styles.contact}>
-                                        <MaterialIcons style={styles.icon} name={'call'} />
-                                        <Text style={styles.contactText}>
-                                            {item.contact}
                                     </Text>
                                     </View>
                                 </View>
@@ -73,7 +70,7 @@ const styles = {
     card: {
         marginVertical: 5,
         width: DIMENSION(70),
-        height: DIMENSION(70),
+        height: DIMENSION(55),
         borderRadius: 12,
         overflow: 'hidden',
         marginHorizontal: 10,
@@ -95,7 +92,8 @@ const styles = {
     },
 
     details: {
-        padding: 6.5
+        padding: 6.5,
+        justifyContent:'center'
     },
 
     description: {

@@ -13,33 +13,11 @@ class MeScreen extends Component {
             <View style={{ height: DIMENSION(5) }} ></View>
         )
     }
-    componentWillMount() {
-        const { currentUser } = firebase.auth()
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                
-            } else {
-                this.props.navigation.navigate("CheckLoginScreen")
-            }
-        })
-    }
-
-    signOutUser = async () => {
-        try {
-            await firebase.auth().signOut();
-            this.props.navigation.navigate("CheckLoginScreen")
-        } catch (e) {
-            alert(e)
-        }
-    }
+  
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <TabHeader
-                    iconPressed={() => this.signOutUser()}
-                    icon={'notifications'}
-                    headerTittle={'Me'}
-                />
+             
                 <View
                     style={styles.container}>
                     <FlatList style={styles.body}
