@@ -5,6 +5,7 @@ export default class User {
 
     constructor() {
         this.getCurrentUser()
+        console.log('USER')
     }
 
     @observable user = null;
@@ -39,6 +40,7 @@ export default class User {
         auth().onAuthStateChanged(user => {
             this.loading = false;
             this.user = user;
+            console.log('USER',this.user)
         })
     }
 

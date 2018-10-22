@@ -69,8 +69,6 @@ class AddPostScreen extends Component {
         switch (index) {
             case 1: return (this.setState({ businessType: 'drinks' }));
             case 2: return (this.setState({ businessType: 'foods' }));
-            case 3: return (this.setState({ businessType: 'shopping' }));
-            case 4: return (this.setState({ businessType: 'streetFoods' }));
         }
     }
 
@@ -78,8 +76,6 @@ class AddPostScreen extends Component {
         switch (type) {
             case 'drinks': return ('Drinks');
             case 'foods': return ('Foods');
-            case 'shopping': return ('Shopping');
-            case 'streetFoods': return ('Street Foods');
         }
     }
     insertDescription(description) {
@@ -239,7 +235,7 @@ class AddPostScreen extends Component {
                     <ActionSheet
                         ref={o => { this.ActionSheet = o }}
                         title={'Select your business Type'}
-                        options={['Cancel', 'Drinks', 'Food', 'Shopping', 'Street Foods']}
+                        options={['Cancel', 'Drinks', 'Food']}
                         cancelButtonIndex={0}
                         destructiveButtonIndex={0}
                         onPress={(index) => { this.onSelectBusinessType(index) }}

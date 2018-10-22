@@ -41,12 +41,6 @@ export default class NewFeed extends Component {
               <Image source={require('../../asset/images/food.png')} style={styles.featureIcon} />
               <Text style={styles.label} >Food</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.navigate('List', 'Street Food', COLORS.DARK_GREEN, false)}
-              style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.DARK_GREEN }]}>
-              <Image source={require('../../asset/images/streetFood.png')} style={styles.featureIcon} />
-              <Text style={styles.label}>Street Food</Text>
-            </TouchableOpacity>
           </View>
           <ScrollableMenu
             data = {drinks}
@@ -72,18 +66,6 @@ export default class NewFeed extends Component {
             })}
             tittle={'Food'}
           />
-          <ScrollableMenu
-            data = {streetFoods}
-            seeAllPressed={() => this.navigate('List', 'Street Food', COLORS.DARK_GREEN, true)}
-            itemPressed={(item) => this.props.navigation.navigate('ViewDetail', {
-              id:item.id,
-              description: item.description,
-              illustration: item.coverUrl,
-              tittle: item.businessName,
-              backgroundColor: COLORS.DARK_GREEN,
-            })}
-            tittle={'Street Food'}
-          />
 
         </ScrollView>
       </View>
@@ -94,7 +76,7 @@ export default class NewFeed extends Component {
 const styles = {
   featureButtonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
     paddingHorizontal: DIMENSION(6),
     marginTop: 15,

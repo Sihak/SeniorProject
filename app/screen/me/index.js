@@ -5,7 +5,11 @@ import { COLORS, DIMENSION, APPEARANCES } from '../../module';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import TabHeader from '../../component/tabHeader';
 import firebase from 'react-native-firebase'
+import {observer, inject} from 'mobx-react'
 
+
+@inject('user')
+@observer
 class MeScreen extends Component {
 
     itemSeperator() {
@@ -14,7 +18,6 @@ class MeScreen extends Component {
         )
     }
     componentWillMount() {
-        const { currentUser } = firebase.auth()
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 
@@ -33,6 +36,7 @@ class MeScreen extends Component {
         }
     }
     render() {
+        const { user } = this.props.user;
         return (
             <View style={{ flex: 1 }}>
                 <TabHeader
@@ -50,8 +54,8 @@ class MeScreen extends Component {
                                     <View style={styles.userProfile}>
                                         <Image style={styles.imgProfile} source={require('../../asset/images/user.png')} />
                                         <View style={styles.userInfo}>
-                                            <Text style={[styles.userInfoText, { fontSize: 32 }]}>Sihak</Text>
-                                            <Text style={styles.userInfoText}>chau.sihak@gmail.com</Text>
+                                            <Text style={[styles.userInfoText, { fontSize: 32 }]}>USER</Text>
+                                            <Text style={styles.userInfoText}>{user.email}</Text>
                                         </View>
                                     </View>
                                     <TouchableOpacity
