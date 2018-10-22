@@ -39,27 +39,27 @@ export default class NewFeed extends Component {
               onPress={() => this.navigate('List', 'foods', COLORS.LIGHT_BLUE, false)}
               style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.LIGHT_BLUE }]}>
               <Image source={require('../../asset/images/food.png')} style={styles.featureIcon} />
-              <Text style={styles.label} >Restaurant</Text>
+              <Text style={styles.label} >Food</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.navigate('List', 'Street Food', COLORS.DARK_GREEN, false)}
-              style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.DARK_GREEN }]}>
-              <Image source={require('../../asset/images/streetFood.png')} style={styles.featureIcon} />
-              <Text style={styles.label}>Street Food</Text>
+              onPress={() => this.navigate('List', 'Street Food', COLORS.RED, false)}
+              style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.RED }]}>
+              <Image source={require('../../asset/images/shopping.png')} style={styles.featureIcon} />
+              <Text style={styles.label}>Shopping</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.featureButtonContainer}>
             <TouchableOpacity
-              onPress={() => this.navigate('List', 'drinks', COLORS.RED, false)}
-              style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.RED }]}>
+              onPress={() => this.navigate('List', 'drinks', COLORS.DARK_GREEN, false)}
+              style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.DARK_GREEN }]}>
               <Image source={require('../../asset/images/trn.png')} style={styles.featureIcon} />
-              <Text style={styles.label} >Transportaion</Text>
+              <Text style={styles.label}>Transportaion</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => this.navigate('List', 'foods', COLORS.LIGHT_BLUE, false)}
               style={[styles.feature, APPEARANCES.SHADOW, { backgroundColor: COLORS.GREEN }]}>
               <Image source={require('../../asset/images/acm.png')} style={styles.featureIcon} />
-              <Text style={styles.label} >Accomodation</Text>
+              <Text style={styles.label}>Accomodation</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => this.navigate('List', 'Street Food', COLORS.SKY, false)}
